@@ -14,6 +14,7 @@
 #include <variant>
 
 #include "BinaryIO/stream/BinaryOutputStream.h"
+#include "JavaObject/EJavaFieldDescriptorType.h"
 
 namespace bio::stream {
     class BinaryInputStream;
@@ -42,11 +43,13 @@ namespace javaobject {
     class SerializedField {
     public:
         const SerializedClass& m_class;
+
+        EJavaFieldDescriptorType type;
         std::string name;
         std::string desc;
         JavaValue value;
 
-        explicit SerializedField(const SerializedClass& clazz, const std::string &name, const std::string &desc) : m_class(clazz), name(name), desc(desc) {}
+        explicit SerializedField(const SerializedClass& clazz, const std::string &name, const EJavaFieldDescriptorType type, const std::string &desc) : m_class(clazz), name(name), type(type), desc(desc) {}
 
         static SerializedField parseFieldEntry(const SerializedClass& clazz, bio::stream::BinaryInputStream &strm);
         static std::string parseSignature(const SerializedClass& clazz, char type, bio::stream::BinaryInputStream &strm);

@@ -11,42 +11,51 @@
 
 #include "JavaObject/JavaSerializedClassParser.h"
 #include "BinaryIO/stream/BinaryInputStream.h"
+#include "JavaObject/EJavaFieldDescriptorType.h"
 
 namespace javaobject {
     SerializedField
-    SerializedField::parseFieldEntry(const SerializedClass &clazz, bio::stream::BinaryInputStream &strm) {
+    SerializedField::parseFieldEntry(const SerializedClass &clazz,
+                                     bio::stream::BinaryInputStream &strm) {
         // Parse field entry
-        const char type = strm.readByte();
+        const EJavaFieldDescriptorType type = strm.read<
+            EJavaFieldDescriptorType>();
         auto descriptor = std::string(1, type);
 
-        const std::string name = strm.readStringWithLength<char>(bio::util::ByteOrder::BIG,
-                                                                 bio::util::string::StringLengthEncoding::LENGTH_PREFIX);
+        const std::string name = strm.readStringWithLength<char>(
+            bio::util::ByteOrder::BIG,
+            bio::util::string::StringLengthEncoding::LENGTH_PREFIX);
 
         // Check if descriptor is object or array
-        if (type == 'L' || type == '[') {
+        if (type == TYPE_OBJECT || type == TYPE_ARRAY) {
             descriptor = parseSignature(clazz, type, strm);
         }
-        return SerializedField{clazz, name, descriptor};
+        return SerializedField{clazz, name, type, descriptor};
     }
 
-    std::string SerializedField::parseSignature(const SerializedClass &clazz, const char type,
-                                                bio::stream::BinaryInputStream &strm) {
+    std::string SerializedField::parseSignature(const SerializedClass &clazz,
+                                                const char type,
+                                                bio::stream::BinaryInputStream &
+                                                strm) {
+        // TODO separate type from descriptor, we should then store some tree of types ig?
+        // we'll see.
         auto descriptor = std::string(1, type);
 
         // Check if descriptor is object or array
-        if (type == 'L' || type == '[') {
+        if (type == TYPE_OBJECT || type == TYPE_ARRAY) {
             char typeCode = strm.readByte();
-            if (typeCode == '[') {
+            if (typeCode == TYPE_ARRAY) {
                 // Read primitive array
                 const char arrayType = strm.readByte();
-                if (arrayType != 'L') {
+                if (arrayType != TYPE_OBJECT) {
                     descriptor += arrayType;
                 } else {
                     descriptor += parseSignature(clazz, arrayType, strm);
                 }
             } else if (typeCode == 't') {
-                descriptor = strm.readStringWithLength<char>(bio::util::ByteOrder::BIG,
-                                                             bio::util::string::StringLengthEncoding::LENGTH_PREFIX);
+                descriptor = strm.readStringWithLength<char>(
+                    bio::util::ByteOrder::BIG,
+                    bio::util::string::StringLengthEncoding::LENGTH_PREFIX);
             } else if (typeCode == 'q') {
                 // Type is the same as the field before this one
                 if (!clazz.m_fields.empty()) {
@@ -65,44 +74,52 @@ namespace javaobject {
         return descriptor;
     }
 
-    JavaValue SerializedField::readFieldValue(JavaSerializedClassParser& parser, const SerializedField &field, bio::stream::BinaryInputStream &strm) {
+    JavaValue SerializedField::readFieldValue(JavaSerializedClassParser &parser,
+                                              const SerializedField &field,
+                                              bio::stream::BinaryInputStream &
+                                              strm) {
         const auto descriptor = field.desc;
-        if (descriptor == "B") {
-            return JavaValue { strm.readSignedByte() };
+        if (field.type == TYPE_BYTE) {
+            return JavaValue{strm.readSignedByte()};
         }
-        if (descriptor == "Z") {
-            return JavaValue { (strm.readByte() != 0) };
+        if (field.type == TYPE_BOOLEAN) {
+            return JavaValue{(strm.readByte() != 0)};
         }
-        if (descriptor == "C") {
-            return JavaValue { static_cast<char>(strm.readByte()) };
+        if (field.type == TYPE_CHARACTER) {
+            return JavaValue{static_cast<char>(strm.readByte())};
         }
-        if (descriptor == "D") {
-            return JavaValue { strm.readBE<double>() };
+        if (field.type == TYPE_DOUBLE) {
+            return JavaValue{strm.readBE<double>()};
         }
-        if (descriptor == "F") {
-            return JavaValue { strm.readBE<float>() };
+        if (field.type == TYPE_FLOAT) {
+            return JavaValue{strm.readBE<float>()};
         }
-        if (descriptor == "I") {
+        if (field.type == TYPE_INT) {
             // Java always stores integers as signed
             // C++ uses two's-complements when reading the integer in
             // which means we need to shift this down to get the
             // correct sign and value.
-            return JavaValue { static_cast<int32_t>(strm.readBE<uint32_t>() >> 8) };
+            return JavaValue
+                {static_cast<int32_t>(strm.readBE<uint32_t>() >> 8)};
         }
-        if (descriptor == "J") {
-            return JavaValue { static_cast<int64_t>(strm.readBE<uint64_t>() >> 8) };
+        if (field.type == TYPE_LONG) {
+            return JavaValue
+                {static_cast<int64_t>(strm.readBE<uint64_t>() >> 8)};
         }
-        if (descriptor.starts_with("L")) {
+        if (field.type == TYPE_OBJECT) {
             if (descriptor == "Ljava/lang/String;") {
-                return JavaValue { std::string(strm.readStringWithLength<char>(bio::util::ByteOrder::BIG, bio::util::string::StringLengthEncoding::LENGTH_PREFIX)) };
+                return JavaValue{
+                    std::string(strm.readStringWithLength<char>(
+                        bio::util::ByteOrder::BIG,
+                        bio::util::string::StringLengthEncoding::LENGTH_PREFIX))};
             }
             strm.seekRelative(-1);
             int offset = strm.getOffset();
             // Object!
             SerializedClass clazz = parser.parseEntry();
-            return JavaValue { std::make_shared<JavaObject>(clazz)};
+            return JavaValue{std::make_shared<JavaObject>(clazz)};
         }
-        if (descriptor.starts_with("[")) {
+        if (field.type == TYPE_ARRAY) {
             // Array!
             return readFieldValue(parser, field, strm);
         }
@@ -123,13 +140,15 @@ namespace javaobject {
     SerializedClass JavaSerializedClassParser::parseEntry() {
         SerializedClass result;
 
-        if (const uint16_t classMagic = this->m_stream.readBE<uint16_t>(); classMagic != 0x7372) {
+        if (const uint16_t classMagic = this->m_stream.readBE<uint16_t>();
+            classMagic != 0x7372) {
             return result;
         }
 
         // Read class name
-        result.m_className = this->m_stream.readStringWithLength<char>(bio::util::ByteOrder::BIG,
-                                                                       bio::util::string::StringLengthEncoding::LENGTH_PREFIX);
+        result.m_className = this->m_stream.readStringWithLength<char>(
+            bio::util::ByteOrder::BIG,
+            bio::util::string::StringLengthEncoding::LENGTH_PREFIX);
         this->m_stream.seekRelative(8);
 
         // TODO: Read fields from serialized class object
@@ -140,14 +159,15 @@ namespace javaobject {
         result.m_fields.clear();
 
         for (int i = 0; i < numberOfFields; i++) {
-            SerializedField field = SerializedField::parseFieldEntry(result, this->m_stream);
+            SerializedField field = SerializedField::parseFieldEntry(
+                result, this->m_stream);
             result.m_fields.push_back(field);
         }
 
         char tcEndBlockData = this->m_stream.readByte();
         if (tcEndBlockData != 0x78) {
             // LOG_ERROR(
-                // "TCEndBlockData was not found after reading fields! Stream is either corrupted or signature parsing failed!");
+            // "TCEndBlockData was not found after reading fields! Stream is either corrupted or signature parsing failed!");
         }
         char tcSuperclassDesc = this->m_stream.readByte();
         if (tcSuperclassDesc == 0x72) {
@@ -157,7 +177,7 @@ namespace javaobject {
             tcEndBlockData = this->m_stream.readByte();
             if (tcEndBlockData != 0x78) {
                 // LOG_ERROR(
-                    // "TCEndBlockData was not found after reading superclass! Stream is either corrupted or superclass could not be parsed!");
+                // "TCEndBlockData was not found after reading superclass! Stream is either corrupted or superclass could not be parsed!");
             }
 
             // TODO: Remove this hack:
@@ -175,7 +195,7 @@ namespace javaobject {
 
         // Read field values
         for (int i = 0; i < numberOfFields; i++) {
-            SerializedField& field = result.m_fields[i];
+            SerializedField &field = result.m_fields[i];
             field.value = field.readFieldValue(*this, field, this->m_stream);
         }
 
