@@ -11,7 +11,7 @@
 #ifndef JAVAOBJECTSTREAMS_EJAVAFIELDDESCRIPTORTYPE_H
 #define JAVAOBJECTSTREAMS_EJAVAFIELDDESCRIPTORTYPE_H
 
-enum EJavaFieldDescriptorType : signed char {
+enum class EPrimitiveTypeCode : signed char {
   TYPE_BYTE = 'B',
   TYPE_CHARACTER = 'C',
   TYPE_DOUBLE = 'D',

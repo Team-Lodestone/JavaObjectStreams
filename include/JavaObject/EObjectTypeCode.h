@@ -11,7 +11,7 @@
 #ifndef JAVAOBJECTSTREAMS_EJAVATYPECODE_H
 #define JAVAOBJECTSTREAMS_EJAVATYPECODE_H
 
-enum EJavaTypeCode : signed char {
+enum class EObjectTypeCode : signed char {
   TC_NULL = 0x70,
   TC_REFERENCE = 0x71,
   TC_CLASSDESC = 0x72,

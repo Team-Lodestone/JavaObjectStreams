@@ -23,8 +23,6 @@ val f = file(if (project.hasProperty("jarDir")) (project.findProperty("jarDir") 
 
 val copy = tasks.register<Copy>("copyJars") {
 	into(f)
-
-	println(f)
 	
 	subprojects.forEach { p ->
 		val t = p.tasks.findByName("jar")
