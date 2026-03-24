@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION VERSION 3.30)
-project(JavaObjectStreams VERSION 1.0.2)
+project(JavaObjectStreams VERSION 1.0.3)
 
 set(CMAKE_CXX_STANDARD 20)
 

@@ -43,11 +43,9 @@ namespace javaobject {
 
         // Check if descriptor is object or array
         if (type == TYPE_OBJECT || type == TYPE_ARRAY) {
-            char typeCode = strm.readByte();
-            if (typeCode == TYPE_ARRAY) {
+            if (const char typeCode = strm.readByte(); typeCode == TYPE_ARRAY) {
                 // Read primitive array
-                const char arrayType = strm.readByte();
-                if (arrayType != TYPE_OBJECT) {
+                if (const char arrayType = strm.readByte(); arrayType != TYPE_OBJECT) {
                     descriptor += arrayType;
                 } else {
                     descriptor += parseSignature(clazz, arrayType, strm);
@@ -75,7 +73,7 @@ namespace javaobject {
     }
 
     JavaValue SerializedField::readFieldValue(JavaSerializedClassParser &parser,
-                                              const SerializedField &field,
+                                              SerializedField &field,
                                               bio::stream::BinaryInputStream &
                                               strm) {
         const auto descriptor = field.desc;
@@ -100,32 +98,73 @@ namespace javaobject {
             // which means we need to shift this down to get the
             // correct sign and value.
             return JavaValue
-                {static_cast<int32_t>(strm.readBE<uint32_t>() >> 8)};
+                    {static_cast<int32_t>(strm.readBE<uint32_t>() >> 8)};
         }
         if (field.type == TYPE_LONG) {
             return JavaValue
-                {static_cast<int64_t>(strm.readBE<uint64_t>() >> 8)};
+                    {static_cast<int64_t>(strm.readBE<uint64_t>() >> 8)};
         }
         if (field.type == TYPE_OBJECT) {
             if (descriptor == "Ljava/lang/String;") {
                 return JavaValue{
                     std::string(strm.readStringWithLength<char>(
                         bio::util::ByteOrder::BIG,
-                        bio::util::string::StringLengthEncoding::LENGTH_PREFIX))};
+                        bio::util::string::StringLengthEncoding::LENGTH_PREFIX))
+                };
             }
             strm.seekRelative(-1);
-            int offset = strm.getOffset();
-            // Object!
+
+            // Parse object
             SerializedClass clazz = parser.parseEntry();
             return JavaValue{std::make_shared<JavaObject>(clazz)};
         }
         if (field.type == TYPE_ARRAY) {
-            // Array!
-            return readFieldValue(parser, field, strm);
+            // Read TCBlockData as a Java Array is an Object (Block-Like)
+            strm.seekRelative(1);
+            auto desc = strm.readStringWithLength<char>(bio::util::ByteOrder::BIG,
+                                                        bio::util::string::StringLengthEncoding::LENGTH_PREFIX);
+
+            JavaArray result;
+            auto modifiedDesc = std::string(desc);
+            if (modifiedDesc.starts_with("[")) {
+                modifiedDesc = modifiedDesc.substr(1);
+            }
+            std::ranges::replace(modifiedDesc, '.', '/');
+            auto originalType = field.type;
+            auto modifiedType = static_cast<EJavaFieldDescriptorType>(modifiedDesc[0]);
+
+            const int64_t uuid = strm.readBE<int64_t>();
+            int padding = strm.readSignedByte();
+            strm.seekRelative(padding);
+
+            if (const uint16_t tcBlockData = strm.readBE<uint16_t>(); tcBlockData != 0x7870) {
+                // LOG_ERROR("TCBlockData could not be found after array value was defined.");
+                std::cout << tcBlockData << std::endl;
+            }
+            int32_t fieldCount = strm.readBE<int32_t>();
+
+            field.setDescriptor(modifiedDesc);
+            field.type = modifiedType;
+            strm.seekRelative(1);
+            for (int i = 0; i < fieldCount; i++) {
+                int offset = strm.getOffset();
+                JavaValue value = readFieldValue(parser, field, strm);
+                offset = strm.getOffset();
+                result.push_back(value);
+                strm.seekRelative(1);
+            }
+            field.setDescriptor(desc);
+            field.type = originalType;
+
+            return result;
         }
 
         // LOG_DEBUG("Descriptor not yet implemented!");
         return {};
+    }
+
+    void SerializedField::setDescriptor(const std::string &desc) {
+        this->desc = desc;
     }
 
     std::vector<SerializedClass> JavaSerializedClassParser::parseAllEntries() {

@@ -26,12 +26,23 @@ namespace javaobject {
     class SerializedField;
 
     struct JavaObject {
-        SerializedClass& m_class;
+        SerializedClass &m_class;
     };
-    using JavaArray = std::vector<JavaObject>;
+
+    class JavaArray;
 
     // DO NOT RE-ORDER VARIANTS
-    using JavaValue = std::variant<int64_t, double, int32_t, float, bool, JavaArray, std::shared_ptr<JavaObject>, std::string>;
+    using JavaValue = std::variant<int64_t, double, int32_t, float, bool, JavaArray, std::shared_ptr<JavaObject>,
+        std::string>;
+
+    class JavaArray : public std::vector<JavaValue> {
+    public:
+        JavaArray() = default;
+
+        explicit JavaArray(const JavaValue &value) {
+            this->emplace_back(value);
+        };
+    };
 
     class SerializedClass {
     public:
@@ -42,27 +53,39 @@ namespace javaobject {
 
     class SerializedField {
     public:
-        const SerializedClass& m_class;
+        const SerializedClass &m_class;
 
         EJavaFieldDescriptorType type;
         std::string name;
         std::string desc;
         JavaValue value;
 
-        explicit SerializedField(const SerializedClass& clazz, const std::string &name, const EJavaFieldDescriptorType type, const std::string &desc) : m_class(clazz), name(name), type(type), desc(desc) {}
+        explicit SerializedField(const SerializedClass &clazz, const std::string &name,
+                                 const EJavaFieldDescriptorType type, std::string &desc) : m_class(clazz), name(name),
+            type(type), desc(desc) {
+        }
 
-        static SerializedField parseFieldEntry(const SerializedClass& clazz, bio::stream::BinaryInputStream &strm);
-        static std::string parseSignature(const SerializedClass& clazz, char type, bio::stream::BinaryInputStream &strm);
-        static JavaValue readFieldValue(JavaSerializedClassParser& parser, const SerializedField &field, bio::stream::BinaryInputStream &strm);
+        static SerializedField parseFieldEntry(const SerializedClass &clazz, bio::stream::BinaryInputStream &strm);
+
+        static std::string parseSignature(const SerializedClass &clazz, char type,
+                                          bio::stream::BinaryInputStream &strm);
+
+        static JavaValue readFieldValue(JavaSerializedClassParser &parser, SerializedField &field,
+                                        bio::stream::BinaryInputStream &strm);
+
+        void setDescriptor(const std::string &desc);
     };
 
     class JavaSerializedClassParser {
-        bio::stream::BinaryInputStream& m_stream;
+        bio::stream::BinaryInputStream &m_stream;
         std::vector<SerializedClass> m_serializedClasses;
+
     public:
-        explicit JavaSerializedClassParser(bio::stream::BinaryInputStream &strm) : m_stream(strm) {};
+        explicit JavaSerializedClassParser(bio::stream::BinaryInputStream &strm) : m_stream(strm) {
+        };
 
         std::vector<SerializedClass> parseAllEntries();
+
         SerializedClass parseEntry();
     };
 } // lodestone::minecraft::common::java::classic::minev3

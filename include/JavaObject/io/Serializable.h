@@ -18,6 +18,7 @@ namespace javaobject::io {
         virtual ~Serializable() = default;
 
         virtual SerializedClass serializeObject() = 0;
+
         // todo deserialize func too I think?
         // or maybe we should be able to create a definition type (just types and names, no values) and pass that into deserializeObject with template to return correct class type
     };
