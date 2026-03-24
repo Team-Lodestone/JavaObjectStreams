@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION VERSION 3.30)
-project(JavaObjectStreams VERSION 1.0.1) #dev version atm but too lazy to set that up, just dont create git tag until it properly deserializes again.
+project(JavaObjectStreams VERSION 1.0.2)
 
 set(CMAKE_CXX_STANDARD 20)
 
