@@ -10,7 +10,11 @@
  */
 #ifndef JAVAOBJECTSTREAMS_OBJECTINPUTSTREAM_H
 #define JAVAOBJECTSTREAMS_OBJECTINPUTSTREAM_H
+#include "JavaObject/type/TypeCodeParser.h"
+#include "JavaObject/type/object/IObject.h"
+
 #include <iostream>
+#include <memory>
 
 // TODO
 
@@ -19,10 +23,12 @@ namespace javaobject::stream {
     public:
         explicit ObjectInputStream(std::istream &input);
 
-        //todo
-        // ObjectInputStream &operator>>(? value);
+        std::unique_ptr<type::object::IObject> readObject();
     private:
         std::istream &m_input;
+        bio::stream::BinaryInputStream m_stream;
+
+        type::TypeCodeParser m_parser;
     };
 
     //some people might prefer STL naming scheme for this, so why not:
