@@ -10,14 +10,14 @@
  */
 #include "JavaObject/stream/ObjectInputStream.h"
 
-#include "JavaObject/type/object/NullObject.h"
+#include "JavaObject/type/object/types/NullObject.h"
 
 namespace javaobject::stream {
-    ObjectInputStream::ObjectInputStream(std::istream &input) : m_input(input), m_stream(input), m_parser(input) {
+    ObjectInputStream::ObjectInputStream(std::istream &input) : m_handleContainer(), m_input(input), m_stream(input), m_parser(input, m_handleContainer) {
     }
 
     std::shared_ptr<type::object::IObject> ObjectInputStream::readObject() {
-        uint16_t magic = this->m_stream.readBE<uint16_t>();
+        const uint16_t magic = this->m_stream.readBE<uint16_t>();
         if (magic != 0xACED) {
             return std::make_shared<type::object::NullObject>();
         }

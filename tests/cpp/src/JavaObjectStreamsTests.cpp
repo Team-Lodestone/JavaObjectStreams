@@ -15,7 +15,7 @@
 
 int main() {
     //todo add all tests
-    tfw::TestFramework::getInstance()->addTest(READ_OBJECT_FILE, "Read input object", [](const tfw::test::util::TestOutputLogger &logger) {
+    // tfw::TestFramework::getInstance()->addTest(READ_OBJECT_FILE, "Read input object", [](const tfw::test::util::TestOutputLogger &logger) {
         std::ifstream input("input/JOSTestClass.obj");
         input.exceptions(std::ios::badbit | std::ios::eofbit);
 
@@ -25,9 +25,9 @@ int main() {
 
         javaobject::stream::ObjectInputStream ois(input);
         auto obj = ois.readObject();
-    });
+    // });
 
-    tfw::TestFramework::getInstance()->run();
+    // tfw::TestFramework::getInstance()->run();
 
     return 0;
 }

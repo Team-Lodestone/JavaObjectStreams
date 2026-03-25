@@ -1,4 +1,11 @@
 # JavaObjectStreams
-Serialization and Deserialization which matches Java's Object streams
+A C++ library to provide serialization and deserialization of Java objects (ala ObjectInputStream and ObjectOutputStream).
 
-This allows for deserializing ObjectOutputStream-serialized files
+### JavaObjectStreams is not...
+- a Java class file parser.
+- a Java disassembler.
+---
+- ✅ Deserialization
+- ❌ Serialization (TODO)
+
+## Contributing
