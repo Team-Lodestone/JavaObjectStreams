@@ -48,10 +48,11 @@ namespace javaobject::type::object::parsers {
 
         // BUG WORKAROUND, REMOVE AFTER WE FIND THE FIX
         parser.stream().seekRelative(-2);
-        for (auto &f : this->m_classDescInfo->fields) {
-            std::shared_ptr<primitive::types::IPrimitiveObject> obj = (*parser.primitiveTypeCodeParser().getParser(f.second->primitiveDescriptor->typeCode))(parser.primitiveTypeCodeParser());
+        for (auto &[name, value] : this->m_classDescInfo->fields) {
+            const auto typeCode = value->primitiveDescriptor->typeCode;
+            std::shared_ptr<primitive::types::IPrimitiveObject> obj = (*parser.primitiveTypeCodeParser().getParser(typeCode))(parser.primitiveTypeCodeParser());
 
-            d->values.emplace(f.first, obj);
+            d->values.emplace(name, obj);
         }
 
         return d;

@@ -14,9 +14,9 @@
 #include "IObject.h"
 #include "JavaObject/type/primitive/types/IPrimitiveObject.h"
 
-#include <cstdint>
 #include <memory>
 #include <unordered_map>
+#include <string>
 
 namespace javaobject::type::object {
     struct ClassDataObject : public IObject {};
