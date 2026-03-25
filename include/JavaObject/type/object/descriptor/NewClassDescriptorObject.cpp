@@ -1,4 +1,4 @@
-/** @file UniquePtrCast.cpp
+/** @file ClassDescriptorObject.cpp
  *
  * @author Dexrn ZacAttack
  * @date 3/24/26
@@ -9,6 +9,6 @@
  * @license This project is licensed under the MIT license, see the LICENSE file
  * for details.
  */
-#include "SmartPointerCast.h"
+#include "NewClassDescriptorObject.h"
 
-namespace javaobject::util {}
+namespace javaobject::type::object::descriptor {}

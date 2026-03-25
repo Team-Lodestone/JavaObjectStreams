@@ -6,35 +6,29 @@
  * @device zPc-i2
  *
  * @copyright Copyright (c) 2026 Team Lodestone
- * @license This project is licensed under the MIT license, see the LICENSE file
- * for details.
+ * @license This project is licensed under the MIT license, see the LICENSE file for details.
  */
-#include "ClassDescriptorParser.h"
+#include "JavaObject/type/parser/descriptor/ClassDescriptorParser.h"
 
 #include "JavaObject/type/TypeCodeParser.h"
 #include "JavaObject/type/object/descriptor/ClassDescriptorObject.h"
-#include "JavaObject/type/parser/descriptor/ClassDescriptorInfoParser.h"
+#include "JavaObject/type/object/descriptor/NewClassDescriptorObject.h"
+#include "JavaObject/type/parser/descriptor/NewClassDescriptorParser.h"
 #include "JavaObject/util/SmartPointerCast.h"
 
-namespace javaobject {
-    namespace type {
-        namespace parser {
-            namespace descriptor {
-                std::unique_ptr<object::IObject> ClassDescriptorParser::operator()(TypeCodeParser &parser) {
-                    std::string className =
-                        parser.stream().readStringWithLength<char>(bio::util::ByteOrder::BIG, bio::util::string::StringLengthEncoding::LENGTH_PREFIX);
-                    uint64_t uid = parser.stream().readBE<uint64_t>();
+namespace javaobject::type::parser::descriptor {
+    std::unique_ptr<object::IObject> ClassDescriptorParser::operator()(TypeCodeParser &parser) const {
+        // TODO UNSAFE!!!!!!
+        // Class objects can sometimes be references, or not exist at all!
+        // We can probably wrap many types in an std::variant to bypass this.
+        auto desc = util::SmartPointerCast::staticUniquePtrCast<object::descriptor::NewClassDescriptorObject>(NewClassDescriptorParser()(parser));
+        auto nullReference = parser.readNext();
+        auto prevObject = parser.readNext();
 
-                    auto info = util::SmartPointerCast::staticUniquePtrCast<object::descriptor::ClassDescriptorObject::Info>(
-                        ClassDescriptorInfoParser()(parser));
-
-                    return std::make_unique<object::descriptor::ClassDescriptorObject>(
-                        className,
-                        uid,
-                        std::move(info)
-                    );
-                }
-            } // namespace descriptor
-        } // namespace parser
-    } // namespace type
-} // namespace javaobject
+        return std::make_unique<object::descriptor::ClassDescriptorObject>(
+            std::move(desc),
+            std::move(nullReference),
+            std::move(prevObject)
+        );
+    }
+} // namespace javaobject::type::parser::descriptor

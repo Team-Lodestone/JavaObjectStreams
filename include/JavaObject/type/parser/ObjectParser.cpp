@@ -15,19 +15,11 @@
 #include "JavaObject/type/object/NullObject.h"
 #include "JavaObject/type/object/Object.h"
 
-namespace javaobject {
-    namespace type {
-        namespace parser {
-            std::unique_ptr<object::IObject>
-            ObjectParser::operator()(TypeCodeParser &parser) {
-                std::unique_ptr<object::IObject> obj = parser.readNext();
-                // todo classdata descriptor
+namespace javaobject::type::parser {
+    std::unique_ptr<object::IObject> ObjectParser::operator()(TypeCodeParser &parser) const {
+        std::unique_ptr<object::IObject> obj = parser.readNext();
+        // todo classdata descriptor
 
-                return std::make_unique<object::Object>(
-                    std::move(obj),
-                    std::make_unique<object::NullObject>()
-                );
-            }
-        } // namespace parser
-    } // namespace type
-} // namespace javaobject
+        return std::make_unique<object::Object>(std::move(obj), std::make_unique<object::NullObject>());
+    }
+} // namespace javaobject::type::parser

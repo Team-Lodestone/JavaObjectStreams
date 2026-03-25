@@ -11,10 +11,6 @@
  */
 #include "StringObject.h"
 
-namespace javaobject {
-    namespace type {
-        namespace object {
-            StringObject::StringObject(const std::string &value) : value(value) {}
-        } // namespace object
-    } // namespace type
-} // namespace javaobject
+namespace javaobject::type::object {
+    StringObject::StringObject(const std::string &value) : value(value) {}
+} // namespace javaobject::type::object

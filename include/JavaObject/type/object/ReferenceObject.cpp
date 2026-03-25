@@ -1,4 +1,4 @@
-/** @file ClassDescriptorObject.cpp
+/** @file ReferenceObject.cpp
  *
  * @author Dexrn ZacAttack
  * @date 3/24/26
@@ -8,6 +8,10 @@
  * @copyright Copyright (c) 2026 Team Lodestone
  * @license This project is licensed under the MIT license, see the LICENSE file for details.
  */
-#include "ClassDescriptorObject.h"
+#include "ReferenceObject.h"
 
-namespace javaobject::type::object::descriptor {}
+namespace javaobject {
+    namespace type {
+        namespace object {} // namespace object
+    } // namespace type
+} // namespace javaobject
