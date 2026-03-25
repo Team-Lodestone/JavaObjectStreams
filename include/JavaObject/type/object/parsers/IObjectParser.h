@@ -11,7 +11,7 @@
  */
 #ifndef JAVAOBJECTSTREAMS_IOBJECTPARSER_H
 #define JAVAOBJECTSTREAMS_IOBJECTPARSER_H
-#include "../types/IObject.h"
+#include "JavaObject/type/object/types/IObject.h"
 
 #include <memory>
 
