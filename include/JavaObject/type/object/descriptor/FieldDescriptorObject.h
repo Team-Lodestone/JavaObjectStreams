@@ -18,12 +18,12 @@
 
 namespace javaobject::type::object::descriptor {
     struct FieldDescriptorObject : public IObject {
-        FieldDescriptorObject(std::unique_ptr<PrimitiveDescriptorObject> &&primitiveDescriptor, std::unique_ptr<IObject> &&objectDescriptor)
+        FieldDescriptorObject(std::shared_ptr<PrimitiveDescriptorObject> &&primitiveDescriptor, std::shared_ptr<IObject> &&objectDescriptor)
             : primitiveDescriptor(std::move(primitiveDescriptor)),
               objectDescriptor(std::move(objectDescriptor)) {}
 
-        std::unique_ptr<PrimitiveDescriptorObject> primitiveDescriptor;
-        std::unique_ptr<IObject> objectDescriptor; // nullptr if primitive type is not OBJECT, ARRAY
+        std::shared_ptr<PrimitiveDescriptorObject> primitiveDescriptor;
+        std::shared_ptr<IObject> objectDescriptor; // nullptr if primitive type is not OBJECT, ARRAY
     };
 } // namespace javaobject::type::object::descriptor
 

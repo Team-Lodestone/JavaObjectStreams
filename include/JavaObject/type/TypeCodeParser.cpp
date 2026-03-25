@@ -25,42 +25,43 @@ namespace javaobject {
             this->m_parsers[EObjectTypeCode::TC_REFERENCE] = std::make_unique<parser::ReferenceParser>();
         }
 
-        std::unique_ptr<object::IObject> TypeCodeParser::readNext() {
+        std::shared_ptr<object::IObject> TypeCodeParser::readNext() {
             const EObjectTypeCode tc = static_cast<EObjectTypeCode>(this->m_input.readByte());
 
-            const auto it = m_parsers.find(tc);
-            if (it != this->m_parsers.end()) {
+            if (const auto it = m_parsers.find(tc); it != this->m_parsers.end()) {
                 return this->readUsingParser(*it->second);
             }
 
-            return std::make_unique<object::NullObject>();
+            return std::make_shared<object::NullObject>();
         }
 
-        std::unique_ptr<object::IObject> TypeCodeParser::readUsingParser(const parser::IObjectParser &parser)  {
+        std::shared_ptr<object::IObject> TypeCodeParser::readUsingParser(const parser::IObjectParser &parser)  {
             return parser(*this);
         }
 
         parser::IObjectParser *
         TypeCodeParser::getParser(const EObjectTypeCode typeCode) {
-            const auto it = m_parsers.find(typeCode);
-            if (it != this->m_parsers.end()) {
+            if (const auto it = m_parsers.find(typeCode); it != this->m_parsers.end()) {
                 return it->second.get();
             }
 
             return nullptr;
         }
 
-        void TypeCodeParser::registerHandle(object::IObject *object) {
+        void TypeCodeParser::registerHandle(std::shared_ptr<object::IObject> object) {
             this->m_handles[m_nextHandle] = object;
             this->m_nextHandle++;
         }
 
-        object::IObject *TypeCodeParser::resolveHandle(const object::ReferenceObject::handle_t handle) {
+        std::shared_ptr<object::IObject> TypeCodeParser::resolveHandle(const object::ReferenceObject::handle_t handle) {
             if (const auto it = m_handles.find(handle); it != this->m_handles.end()) {
                 return it->second;
             }
 
             return nullptr;
+        }
+        std::shared_ptr<object::IObject> TypeCodeParser::resolveReference(const object::ReferenceObject *reference) {
+            return this->resolveHandle(reference->handle);
         }
 
         bio::stream::BinaryInputStream &TypeCodeParser::stream() {

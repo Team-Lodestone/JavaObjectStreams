@@ -17,7 +17,7 @@ namespace javaobject::type::parser::descriptor {
 
     class NewClassDescriptorParser : public IObjectParser {
       public:
-        std::unique_ptr<object::IObject>
+        std::shared_ptr<object::IObject>
         operator()(TypeCodeParser &parser) const override;
     };
 

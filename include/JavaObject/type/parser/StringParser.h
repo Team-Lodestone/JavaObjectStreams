@@ -16,7 +16,7 @@
 namespace javaobject::type::parser {
     class StringParser : public IObjectParser {
     public:
-        std::unique_ptr<object::IObject> operator()(TypeCodeParser &parser) const override;
+        std::shared_ptr<object::IObject> operator()(TypeCodeParser &parser) const override;
     };
 } // namespace javaobject::type::parser
 

@@ -21,11 +21,11 @@ namespace javaobject::type::object {
     struct ClassDataObject : public IObject {};
 
     struct NowrClassClassDataObject : public ClassDataObject {
-        std::unordered_map<std::string, std::unique_ptr<IObject>> values;
+        std::unordered_map<std::string, std::shared_ptr<IObject>> values;
     };
 
     struct AnnotationClassDataObject : public ClassDataObject {
-        std::unique_ptr<AnnotationObject> annotation;
+        std::shared_ptr<AnnotationObject> annotation;
     };
 
     struct WrClassClassDataObject : NowrClassClassDataObject, AnnotationClassDataObject {};

@@ -16,10 +16,10 @@
 #include "JavaObject/type/object/Object.h"
 
 namespace javaobject::type::parser {
-    std::unique_ptr<object::IObject> ObjectParser::operator()(TypeCodeParser &parser) const {
-        std::unique_ptr<object::IObject> obj = parser.readNext();
+    std::shared_ptr<object::IObject> ObjectParser::operator()(TypeCodeParser &parser) const {
+        std::shared_ptr<object::IObject> obj = parser.readNext();
         // todo classdata descriptor
 
-        return std::make_unique<object::Object>(std::move(obj), std::make_unique<object::NullObject>());
+        return std::make_shared<object::Object>(std::move(obj), std::make_shared<object::NullObject>());
     }
 } // namespace javaobject::type::parser

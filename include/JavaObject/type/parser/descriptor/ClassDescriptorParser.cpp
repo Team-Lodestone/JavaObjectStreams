@@ -17,15 +17,15 @@
 #include "JavaObject/util/SmartPointerCast.h"
 
 namespace javaobject::type::parser::descriptor {
-    std::unique_ptr<object::IObject> ClassDescriptorParser::operator()(TypeCodeParser &parser) const {
+    std::shared_ptr<object::IObject> ClassDescriptorParser::operator()(TypeCodeParser &parser) const {
         // TODO UNSAFE!!!!!!
         // Class objects can sometimes be references, or not exist at all!
         // We can probably wrap many types in an std::variant to bypass this.
-        auto desc = util::SmartPointerCast::staticUniquePtrCast<object::descriptor::NewClassDescriptorObject>(NewClassDescriptorParser()(parser));
+        auto desc = std::static_pointer_cast<object::descriptor::NewClassDescriptorObject>(NewClassDescriptorParser()(parser));
         auto nullReference = parser.readNext();
         auto prevObject = parser.readNext();
 
-        return std::make_unique<object::descriptor::ClassDescriptorObject>(
+        return std::make_shared<object::descriptor::ClassDescriptorObject>(
             std::move(desc),
             std::move(nullReference),
             std::move(prevObject)

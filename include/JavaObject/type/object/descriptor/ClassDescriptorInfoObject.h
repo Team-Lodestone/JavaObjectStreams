@@ -19,8 +19,8 @@
 
 namespace javaobject::type::object::descriptor {
     struct ClassDescriptorInfoObject : public IObject {
-        ClassDescriptorInfoObject(const std::int8_t flags, std::unordered_map<std::unique_ptr<FieldDescriptorObject>, std::unique_ptr<IObject>> fields, std::unique_ptr<IObject> classAnnotation,
-             std::unique_ptr<IObject> superClassDescriptor)
+        ClassDescriptorInfoObject(const std::int8_t flags, std::unordered_map<std::shared_ptr<FieldDescriptorObject>, std::shared_ptr<IObject>> fields, std::shared_ptr<IObject> classAnnotation,
+             std::shared_ptr<IObject> superClassDescriptor)
             : flags(flags), fields(std::move(fields)), classAnnotation(std::move(classAnnotation)),
               superClassDescriptor(std::move(superClassDescriptor)) {}
 
@@ -35,10 +35,10 @@ namespace javaobject::type::object::descriptor {
         std::int8_t flags;
         // field -> value
         // nvm since we have to store field values separately, we will just key them by field name there.
-        std::unordered_map<std::unique_ptr<FieldDescriptorObject>, std::unique_ptr<IObject>> fields;
-        std::unique_ptr<IObject> classAnnotation;
+        std::unordered_map<std::shared_ptr<FieldDescriptorObject>, std::shared_ptr<IObject>> fields;
+        std::shared_ptr<IObject> classAnnotation;
 
-        std::unique_ptr<IObject> superClassDescriptor;
+        std::shared_ptr<IObject> superClassDescriptor;
     };
 } // namespace javaobject::type::object::descriptor
 

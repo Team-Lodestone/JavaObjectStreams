@@ -23,7 +23,7 @@ namespace javaobject::stream {
     public:
         explicit ObjectInputStream(std::istream &input);
 
-        std::unique_ptr<type::object::IObject> readObject();
+        std::shared_ptr<type::object::IObject> readObject();
     private:
         std::istream &m_input;
         bio::stream::BinaryInputStream m_stream;

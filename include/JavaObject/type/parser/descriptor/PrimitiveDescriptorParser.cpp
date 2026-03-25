@@ -16,11 +16,11 @@
 #include "JavaObject/type/object/descriptor/PrimitiveDescriptorObject.h"
 
 namespace javaobject::type::parser::descriptor {
-    std::unique_ptr<object::IObject> PrimitiveDescriptorParser::operator()(TypeCodeParser &parser) const {
+    std::shared_ptr<object::IObject> PrimitiveDescriptorParser::operator()(TypeCodeParser &parser) const {
         EPrimitiveTypeCode tc = parser.stream().read<EPrimitiveTypeCode>();
         std::string name =
             parser.stream().readStringWithLength<char>(bio::util::ByteOrder::BIG, bio::util::string::StringLengthEncoding::LENGTH_PREFIX);
 
-        return std::make_unique<object::descriptor::PrimitiveDescriptorObject>(tc, name);
+        return std::make_shared<object::descriptor::PrimitiveDescriptorObject>(tc, name);
     }
 } // namespace javaobject::type::parser::descriptor

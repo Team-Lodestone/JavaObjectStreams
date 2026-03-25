@@ -12,6 +12,6 @@
 #include "Object.h"
 
 namespace javaobject::type::object {
-    Object::Object(std::unique_ptr<object::IObject> &&clazz, std::unique_ptr<object::IObject> &&classData)
+    Object::Object(std::shared_ptr<object::IObject> &&clazz, std::shared_ptr<object::IObject> &&classData)
         : clazz(std::move(clazz)), classData(std::move(classData)) {}
 } // namespace javaobject::type::object
