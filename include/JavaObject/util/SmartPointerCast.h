@@ -9,22 +9,19 @@
  * @license This project is licensed under the MIT license, see the LICENSE file
  * for details.
  */
-#ifndef JAVAOUTPUTSTREAMS_UNIQUEPTRCAST_H
-#define JAVAOUTPUTSTREAMS_UNIQUEPTRCAST_H
+#ifndef JAVAOBJECTSTREAMS_UNIQUEPTRCAST_H
+#define JAVAOBJECTSTREAMS_UNIQUEPTRCAST_H
 #include <memory>
 
-namespace javaobject {
-    namespace util {
-        class SmartPointerCast {
-        public:
-            template <typename To, typename From>
-            static std::unique_ptr<To> staticUniquePtrCast(std::unique_ptr<From> ptr) {
-                To *p = static_cast<To *>(ptr.release());
+namespace javaobject::util {
+    class SmartPointerCast {
+      public:
+        template <typename To, typename From> static std::unique_ptr<To> staticUniquePtrCast(std::unique_ptr<From> ptr) {
+            To *p = static_cast<To *>(ptr.release());
 
-                return std::unique_ptr<To>(p);
-            }
-        };
-    } // namespace util
-} // namespace javaobject
+            return std::unique_ptr<To>(p);
+        }
+    };
+} // namespace javaobject::util
 
-#endif // JAVAOUTPUTSTREAMS_UNIQUEPTRCAST_H
+#endif // JAVAOBJECTSTREAMS_UNIQUEPTRCAST_H

@@ -9,8 +9,8 @@
  * @license This project is licensed under the MIT license, see the LICENSE file
  * for details.
  */
-#ifndef JAVAOUTPUTSTREAMS_IOBJECTPARSER_H
-#define JAVAOUTPUTSTREAMS_IOBJECTPARSER_H
+#ifndef JAVAOBJECTSTREAMS_IOBJECTPARSER_H
+#define JAVAOBJECTSTREAMS_IOBJECTPARSER_H
 #include "JavaObject/type/object/IObject.h"
 
 #include <memory>
@@ -23,8 +23,8 @@ namespace javaobject::type::parser {
       public:
         virtual ~IObjectParser() = default;
 
-        virtual std::unique_ptr<object::IObject> operator()(TypeCodeParser &parser) = 0;
+        virtual std::unique_ptr<object::IObject> operator()(TypeCodeParser &parser) const = 0;
     };
 } // namespace javaobject::type::parser
 
-#endif // JAVAOUTPUTSTREAMS_IOBJECTPARSER_H
+#endif // JAVAOBJECTSTREAMS_IOBJECTPARSER_H

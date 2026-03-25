@@ -9,8 +9,8 @@
  * @license This project is licensed under the MIT license, see the LICENSE file
  * for details.
  */
-#ifndef JAVAOUTPUTSTREAMS_STRINGOBJECT_H
-#define JAVAOUTPUTSTREAMS_STRINGOBJECT_H
+#ifndef JAVAOBJECTSTREAMS_STRINGOBJECT_H
+#define JAVAOBJECTSTREAMS_STRINGOBJECT_H
 #include "JavaObject/type/object/IObject.h"
 
 #include <string>
@@ -23,4 +23,4 @@ namespace javaobject::type::object {
     };
 } // namespace javaobject::type::object
 
-#endif // JAVAOUTPUTSTREAMS_STRINGOBJECT_H
+#endif // JAVAOBJECTSTREAMS_STRINGOBJECT_H

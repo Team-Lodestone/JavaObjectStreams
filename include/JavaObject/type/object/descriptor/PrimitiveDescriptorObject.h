@@ -9,28 +9,20 @@
  * @license This project is licensed under the MIT license, see the LICENSE file
  * for details.
  */
-#ifndef JAVAOUTPUTSTREAMS_PRIMITIVEDESCRIPTOROBJECT_H
-#define JAVAOUTPUTSTREAMS_PRIMITIVEDESCRIPTOROBJECT_H
+#ifndef JAVAOBJECTSTREAMS_PRIMITIVEDESCRIPTOROBJECT_H
+#define JAVAOBJECTSTREAMS_PRIMITIVEDESCRIPTOROBJECT_H
 #include "JavaObject/EPrimitiveTypeCode.h"
 #include "JavaObject/type/object/IObject.h"
 
 #include <string>
 
-namespace javaobject {
-    namespace type {
-        namespace object {
-            namespace descriptor {
-                struct PrimitiveDescriptorObject : public IObject {
-                    PrimitiveDescriptorObject(const EPrimitiveTypeCode typeCode,
-                                              const std::string &name)
-                        : typeCode(typeCode), name(name) {}
+namespace javaobject::type::object::descriptor {
+    struct PrimitiveDescriptorObject : public IObject {
+        PrimitiveDescriptorObject(const EPrimitiveTypeCode typeCode, const std::string &name) : typeCode(typeCode), name(name) {}
 
-                    EPrimitiveTypeCode typeCode;
-                    std::string name;
-                };
-            } // namespace descriptor
-        } // namespace object
-    } // namespace type
-} // namespace javaobject
+        EPrimitiveTypeCode typeCode;
+        std::string name;
+    };
+} // namespace javaobject::type::object::descriptor
 
-#endif // JAVAOUTPUTSTREAMS_PRIMITIVEDESCRIPTOROBJECT_H
+#endif // JAVAOBJECTSTREAMS_PRIMITIVEDESCRIPTOROBJECT_H

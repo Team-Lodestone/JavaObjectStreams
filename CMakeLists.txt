@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION VERSION 3.30)
-project(JavaObjectStreams VERSION 1.0.2)
+project(JavaObjectStreams VERSION 1.1.1)
 
 set(CMAKE_CXX_STANDARD 20)
 
@@ -38,10 +38,10 @@ set(FILES
         include/JavaObject/type/parser/ObjectParser.h
         include/JavaObject/type/object/Object.cpp
         include/JavaObject/type/object/Object.h
-        include/JavaObject/type/parser/descriptor/ClassDescriptorParser.cpp
-        include/JavaObject/type/parser/descriptor/ClassDescriptorParser.h
-        include/JavaObject/type/object/descriptor/ClassDescriptorObject.cpp
-        include/JavaObject/type/object/descriptor/ClassDescriptorObject.h
+        include/JavaObject/type/parser/descriptor/NewClassDescriptorParser.cpp
+        include/JavaObject/type/parser/descriptor/NewClassDescriptorParser.h
+        include/JavaObject/type/object/descriptor/NewClassDescriptorObject.cpp
+        include/JavaObject/type/object/descriptor/NewClassDescriptorObject.h
         include/JavaObject/type/parser/descriptor/ClassDescriptorInfoParser.cpp
         include/JavaObject/type/parser/descriptor/ClassDescriptorInfoParser.h
         include/JavaObject/type/parser/descriptor/FieldDescriptorParser.cpp
@@ -54,6 +54,22 @@ set(FILES
         include/JavaObject/type/parser/descriptor/PrimitiveDescriptorParser.h
         include/JavaObject/util/SmartPointerCast.cpp
         include/JavaObject/util/SmartPointerCast.h
+        include/JavaObject/type/object/ClassDataObject.cpp
+        include/JavaObject/type/object/ClassDataObject.h
+        include/JavaObject/type/object/AnnotationObject.cpp
+        include/JavaObject/type/object/AnnotationObject.h
+        include/JavaObject/type/parser/ClassDataParser.cpp
+        include/JavaObject/type/parser/ClassDataParser.h
+        include/JavaObject/type/object/descriptor/ClassDescriptorObject.cpp
+        include/JavaObject/type/object/descriptor/ClassDescriptorObject.h
+        include/JavaObject/type/parser/descriptor/ClassDescriptorParser.cpp
+        include/JavaObject/type/parser/descriptor/ClassDescriptorParser.h
+        include/JavaObject/type/object/ReferenceObject.cpp
+        include/JavaObject/type/object/ReferenceObject.h
+        include/JavaObject/type/parser/ReferenceParser.cpp
+        include/JavaObject/type/parser/ReferenceParser.h
+        include/JavaObject/type/object/descriptor/ClassDescriptorInfoObject.cpp
+        include/JavaObject/type/object/descriptor/ClassDescriptorInfoObject.h
 )
 
 add_library(JavaObjectStreams SHARED ${FILES})
@@ -70,3 +86,11 @@ if (JAVAOBJECTSTREAMS_BUILD_TESTS)
 endif()
 
 unset(JAVAOBJECTSTREAMS_BUILD_TESTS CACHE)
+
+option(JAVAOBJECTSTREAMS_DOCS_TARGET "Create documentation target" ON)
+
+if (JAVAOBJECTSTREAMS_DOCS_TARGET STREQUAL "ON")
+    include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/doxygen.cmake")
+endif ()
+
+unset(JAVAOBJECTSTREAMS_DOCS_TARGET CACHE)

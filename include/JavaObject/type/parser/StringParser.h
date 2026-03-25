@@ -9,15 +9,15 @@
  * @license This project is licensed under the MIT license, see the LICENSE file
  * for details.
  */
-#ifndef JAVAOUTPUTSTREAMS_STRINGPARSER_H
-#define JAVAOUTPUTSTREAMS_STRINGPARSER_H
+#ifndef JAVAOBJECTSTREAMS_STRINGPARSER_H
+#define JAVAOBJECTSTREAMS_STRINGPARSER_H
 #include "JavaObject/type/parser/IObjectParser.h"
 
 namespace javaobject::type::parser {
     class StringParser : public IObjectParser {
     public:
-        std::unique_ptr<object::IObject> operator()(TypeCodeParser &parser) override;
+        std::unique_ptr<object::IObject> operator()(TypeCodeParser &parser) const override;
     };
 } // namespace javaobject::type::parser
 
-#endif // JAVAOUTPUTSTREAMS_STRINGPARSER_H
+#endif // JAVAOBJECTSTREAMS_STRINGPARSER_H

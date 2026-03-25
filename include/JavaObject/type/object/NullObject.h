@@ -9,12 +9,12 @@
  * @license This project is licensed under the MIT license, see the LICENSE file
  * for details.
  */
-#ifndef JAVAOUTPUTSTREAMS_NULLOBJECT_H
-#define JAVAOUTPUTSTREAMS_NULLOBJECT_H
+#ifndef JAVAOBJECTSTREAMS_NULLOBJECT_H
+#define JAVAOBJECTSTREAMS_NULLOBJECT_H
 #include "IObject.h"
 
 namespace javaobject::type::object {
     class NullObject : public IObject {};
 } // namespace javaobject::type::object
 
-#endif // JAVAOUTPUTSTREAMS_NULLOBJECT_H
+#endif // JAVAOBJECTSTREAMS_NULLOBJECT_H

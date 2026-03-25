@@ -9,22 +9,15 @@
  * @license This project is licensed under the MIT license, see the LICENSE file
  * for details.
  */
-#ifndef JAVAOUTPUTSTREAMS_PRIMITIVEDESCRIPTORPARSER_H
-#define JAVAOUTPUTSTREAMS_PRIMITIVEDESCRIPTORPARSER_H
+#ifndef JAVAOBJECTSTREAMS_PRIMITIVEDESCRIPTORPARSER_H
+#define JAVAOBJECTSTREAMS_PRIMITIVEDESCRIPTORPARSER_H
 #include "JavaObject/type/parser/IObjectParser.h"
 
-namespace javaobject {
-    namespace type {
-        namespace parser {
-            namespace descriptor {
-                class PrimitiveDescriptorParser : public IObjectParser {
-                  public:
-                    std::unique_ptr<object::IObject>
-                    operator()(TypeCodeParser &parser) override;
-                };
-            } // namespace descriptor
-        } // namespace parser
-    } // namespace type
-} // namespace javaobject
+namespace javaobject::type::parser::descriptor {
+    class PrimitiveDescriptorParser : public IObjectParser {
+      public:
+        std::unique_ptr<object::IObject> operator()(TypeCodeParser &parser) const override;
+    };
+} // namespace javaobject::type::parser::descriptor
 
-#endif // JAVAOUTPUTSTREAMS_PRIMITIVEDESCRIPTORPARSER_H
+#endif // JAVAOBJECTSTREAMS_PRIMITIVEDESCRIPTORPARSER_H

@@ -11,10 +11,4 @@
  */
 #include "FieldDescriptorObject.h"
 
-namespace javaobject {
-    namespace type {
-        namespace object {
-            namespace descriptor {} // namespace descriptor
-        } // namespace object
-    } // namespace type
-} // namespace javaobject
+namespace javaobject::type::object::descriptor {}

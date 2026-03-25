@@ -19,7 +19,7 @@
 
 namespace javaobject::type::parser::descriptor {
     std::unique_ptr<object::IObject>
-    FieldDescriptorParser::operator()(TypeCodeParser &parser) {
+    FieldDescriptorParser::operator()(TypeCodeParser &parser) const {
         auto fd = std::make_unique<object::descriptor::FieldDescriptorObject>(
             nullptr, nullptr);
 

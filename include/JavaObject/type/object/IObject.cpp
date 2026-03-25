@@ -11,8 +11,4 @@
  */
 #include "IObject.h"
 
-namespace javaobject {
-    namespace type {
-        namespace object {} // namespace object
-    } // namespace type
-} // namespace javaobject
+namespace javaobject::type::object {}

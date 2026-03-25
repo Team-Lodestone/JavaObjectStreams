@@ -9,8 +9,8 @@
  * @license This project is licensed under the MIT license, see the LICENSE file
  * for details.
  */
-#ifndef JAVAOUTPUTSTREAMS_FIELDDESCRIPTOROBJECT_H
-#define JAVAOUTPUTSTREAMS_FIELDDESCRIPTOROBJECT_H
+#ifndef JAVAOBJECTSTREAMS_FIELDDESCRIPTOROBJECT_H
+#define JAVAOBJECTSTREAMS_FIELDDESCRIPTOROBJECT_H
 #include "JavaObject/type/object/IObject.h"
 #include "JavaObject/type/object/descriptor/PrimitiveDescriptorObject.h"
 
@@ -27,4 +27,4 @@ namespace javaobject::type::object::descriptor {
     };
 } // namespace javaobject::type::object::descriptor
 
-#endif // JAVAOUTPUTSTREAMS_FIELDDESCRIPTOROBJECT_H
+#endif // JAVAOBJECTSTREAMS_FIELDDESCRIPTOROBJECT_H
