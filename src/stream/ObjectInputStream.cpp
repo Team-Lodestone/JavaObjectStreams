@@ -16,10 +16,10 @@ namespace javaobject::stream {
     ObjectInputStream::ObjectInputStream(std::istream &input) : m_input(input), m_stream(input), m_parser(input) {
     }
 
-    std::unique_ptr<type::object::IObject> ObjectInputStream::readObject() {
+    std::shared_ptr<type::object::IObject> ObjectInputStream::readObject() {
         uint16_t magic = this->m_stream.readBE<uint16_t>();
         if (magic != 0xACED) {
-            return std::make_unique<type::object::NullObject>();
+            return std::make_shared<type::object::NullObject>();
         }
 
         int16_t count = this->m_stream.readBE<uint16_t>();

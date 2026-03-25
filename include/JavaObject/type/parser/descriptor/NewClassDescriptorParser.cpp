@@ -14,16 +14,18 @@
 #include "JavaObject/type/TypeCodeParser.h"
 #include "JavaObject/type/object/descriptor/NewClassDescriptorObject.h"
 #include "JavaObject/type/parser/descriptor/ClassDescriptorInfoParser.h"
-#include "JavaObject/util/SmartPointerCast.h"
 
 namespace javaobject::type::parser::descriptor {
-    std::unique_ptr<object::IObject> NewClassDescriptorParser::operator()(TypeCodeParser &parser) const {
+    std::shared_ptr<object::IObject> NewClassDescriptorParser::operator()(TypeCodeParser &parser) const {
         std::string className =
             parser.stream().readStringWithLength<char>(bio::util::ByteOrder::BIG, bio::util::string::StringLengthEncoding::LENGTH_PREFIX);
         uint64_t uid = parser.stream().readBE<uint64_t>();
 
-        auto info = util::SmartPointerCast::staticUniquePtrCast<object::descriptor::ClassDescriptorInfoObject>(ClassDescriptorInfoParser()(parser));
+        auto desc = std::make_shared<object::descriptor::NewClassDescriptorObject>(className, uid, nullptr);
+        parser.registerHandle(desc); //register handle
 
-        return std::make_unique<object::descriptor::NewClassDescriptorObject>(className, uid, std::move(info));
+        desc->info = std::static_pointer_cast<object::descriptor::ClassDescriptorInfoObject>(ClassDescriptorInfoParser()(parser));
+
+        return desc;
     }
 } // namespace javaobject::type::parser::descriptor

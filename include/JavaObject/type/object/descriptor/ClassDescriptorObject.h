@@ -17,13 +17,13 @@
 
 namespace javaobject::type::object::descriptor {
     struct ClassDescriptorObject : public IObject {
-        ClassDescriptorObject(std::unique_ptr<NewClassDescriptorObject> desc, std::unique_ptr<IObject> nullReference,
-                              std::unique_ptr<IObject> prevObject)
+        ClassDescriptorObject(std::shared_ptr<NewClassDescriptorObject> desc, std::shared_ptr<IObject> nullReference,
+                              std::shared_ptr<IObject> prevObject)
             : desc(std::move(desc)), nullReference(std::move(nullReference)), prevObject(std::move(prevObject)) {}
 
-        std::unique_ptr<NewClassDescriptorObject> desc;
-        std::unique_ptr<IObject> nullReference;
-        std::unique_ptr<IObject> prevObject;
+        std::shared_ptr<NewClassDescriptorObject> desc;
+        std::shared_ptr<IObject> nullReference;
+        std::shared_ptr<IObject> prevObject;
     };
 } // namespace javaobject::type::object::descriptor
 

@@ -18,12 +18,12 @@
 #include "JavaObject/util/SmartPointerCast.h"
 
 namespace javaobject::type::parser::descriptor {
-    std::unique_ptr<object::IObject>
+    std::shared_ptr<object::IObject>
     FieldDescriptorParser::operator()(TypeCodeParser &parser) const {
-        auto fd = std::make_unique<object::descriptor::FieldDescriptorObject>(
+        auto fd = std::make_shared<object::descriptor::FieldDescriptorObject>(
             nullptr, nullptr);
 
-        fd->primitiveDescriptor = util::SmartPointerCast::staticUniquePtrCast<
+        fd->primitiveDescriptor = std::static_pointer_cast<
             object::descriptor::PrimitiveDescriptorObject>(
             std::move(PrimitiveDescriptorParser()(parser)));
 

@@ -28,13 +28,13 @@ namespace javaobject::type::object::descriptor {
 
     class NewClassDescriptorObject : public IObject {
       public:
-        NewClassDescriptorObject(const std::string &name, const std::uint64_t serialVersionUid, std::unique_ptr<ClassDescriptorInfoObject> info)
+        NewClassDescriptorObject(const std::string &name, const std::uint64_t serialVersionUid, std::shared_ptr<ClassDescriptorInfoObject> info)
             : name(name), serialVersionUid(serialVersionUid), info(std::move(info)) {}
 
         std::string name;
         std::uint64_t serialVersionUid;
 
-        std::unique_ptr<ClassDescriptorInfoObject> info;
+        std::shared_ptr<ClassDescriptorInfoObject> info;
     };
 } // namespace javaobject::type::object::descriptor
 

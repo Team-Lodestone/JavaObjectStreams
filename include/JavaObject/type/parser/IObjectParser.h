@@ -23,7 +23,7 @@ namespace javaobject::type::parser {
       public:
         virtual ~IObjectParser() = default;
 
-        virtual std::unique_ptr<object::IObject> operator()(TypeCodeParser &parser) const = 0;
+        virtual std::shared_ptr<object::IObject> operator()(TypeCodeParser &parser) const = 0;
     };
 } // namespace javaobject::type::parser
 

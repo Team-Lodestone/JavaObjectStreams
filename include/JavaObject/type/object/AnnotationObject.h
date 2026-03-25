@@ -16,10 +16,10 @@
 
 namespace javaobject::type::object {
     struct AnnotationObject : public IObject {
-        AnnotationObject(std::unique_ptr<IObject> type, std::unique_ptr<IObject> value) : type(std::move(type)), value(std::move(value)) {}
+        AnnotationObject(std::shared_ptr<IObject> type, std::shared_ptr<IObject> value) : type(std::move(type)), value(std::move(value)) {}
 
-        std::unique_ptr<IObject> type;
-        std::unique_ptr<IObject> value; // only present if type != TC_ENDBLOCKDATA
+        std::shared_ptr<IObject> type;
+        std::shared_ptr<IObject> value; // only present if type != TC_ENDBLOCKDATA
     };
 } // namespace javaobject::type::object
 

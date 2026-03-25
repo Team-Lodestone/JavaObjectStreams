@@ -25,33 +25,34 @@ namespace javaobject::type {
     public:
         explicit TypeCodeParser(std::istream &input);
 
-        std::unique_ptr<object::IObject> readNext();
+        std::shared_ptr<object::IObject> readNext();
 
         template <typename T>
         requires std::is_base_of_v<object::IObject, T>
-        std::unique_ptr<T> readNextAs() {
-            return util::SmartPointerCast::staticUniquePtrCast<T>(this->readNext());
+        std::shared_ptr<T> readNextAs() {
+            return std::static_pointer_cast<T>(this->readNext());
         }
 
-        std::unique_ptr<object::IObject> readUsingParser(const parser::IObjectParser &parser);
+        std::shared_ptr<object::IObject> readUsingParser(const parser::IObjectParser &parser);
 
         template <typename T>
         requires std::is_base_of_v<object::IObject, T>
-        std::unique_ptr<T> readAsUsingParser(const parser::IObjectParser &parser) {
-            return util::SmartPointerCast::staticUniquePtrCast<T>(this->readUsingParser(parser));
+        std::shared_ptr<T> readAsUsingParser(const parser::IObjectParser &parser) {
+            return std::static_pointer_cast<T>(this->readUsingParser(parser));
         }
 
         parser::IObjectParser *getParser(const EObjectTypeCode typeCode);
 
-        void registerHandle(object::IObject *object);
-        object::IObject *resolveHandle(const object::ReferenceObject::handle_t handle);
+        void registerHandle(std::shared_ptr<object::IObject> object);
+        std::shared_ptr<object::IObject> resolveHandle(const object::ReferenceObject::handle_t handle);
+        std::shared_ptr<object::IObject> resolveReference(const object::ReferenceObject *reference);
 
         bio::stream::BinaryInputStream &stream();
     private:
         //todo should they be shared_ptr????
         // sounds like big change but if needed im fine with it.
         /** Links handles to objects by pointer, these objects are expected to be stored already, otherwise it would leave a dangling/invalid pointer. */
-        std::unordered_map<object::ReferenceObject::handle_t, object::IObject *> m_handles;
+        std::unordered_map<object::ReferenceObject::handle_t, std::shared_ptr<object::IObject>> m_handles;
         object::ReferenceObject::handle_t m_nextHandle = 0x7E000000;
 
         /** Links typecodes to their parser class */

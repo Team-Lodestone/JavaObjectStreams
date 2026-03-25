@@ -18,10 +18,10 @@
 
 namespace javaobject::type::object {
     struct Object : public IObject {
-        Object(std::unique_ptr<object::IObject> &&clazz, std::unique_ptr<object::IObject> &&classData);
+        Object(std::shared_ptr<object::IObject> &&clazz, std::shared_ptr<object::IObject> &&classData);
 
-        std::unique_ptr<IObject> clazz;
-        std::unique_ptr<IObject> classData; // todo use right type
+        std::shared_ptr<IObject> clazz;
+        std::shared_ptr<IObject> classData; // todo use right type
     };
 } // namespace javaobject::type::object
 
