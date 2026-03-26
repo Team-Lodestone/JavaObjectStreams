@@ -35,7 +35,7 @@ namespace javaobject::type::primitive {
     }
 
     std::shared_ptr<types::IPrimitiveObject> PrimitiveTypeCodeParser::readNext() {
-        const EPrimitiveTypeCode tc = static_cast<EPrimitiveTypeCode>(this->m_input.readByte());
+        const auto tc = static_cast<EPrimitiveTypeCode>(this->m_input.readByte());
 
         if (const auto it = m_parsers.find(tc); it != this->m_parsers.end()) {
             return this->readUsingParser(*it->second);

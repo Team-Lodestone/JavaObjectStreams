@@ -114,6 +114,14 @@ set(FILES
         include/JavaObject/type/primitive/parsers/PrimitiveBooleanObjectParser.h
         include/JavaObject/type/object/ObjectTypeCodeParser.h
         src/type/object/ObjectTypeCodeParser.cpp
+        src/type/TypeCodeParserStorage.cpp
+        include/JavaObject/type/TypeCodeParserStorage.h
+        src/type/ITypeCodeStorageHolder.cpp
+        include/JavaObject/type/ITypeCodeStorageHolder.h
+        src/type/primitive/parsers/PrimitiveJavaObjectParser.cpp
+        include/JavaObject/type/primitive/parsers/PrimitiveJavaObjectParser.h
+        src/type/primitive/parsers/PrimitiveArrayObjectParser.cpp
+        include/JavaObject/type/primitive/parsers/PrimitiveArrayObjectParser.h
 )
 
 add_library(JavaObjectStreams SHARED ${FILES})
