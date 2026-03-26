@@ -28,7 +28,9 @@ public class JOSTestClass implements Serializable {
 	
 	Subclass sc = new Subclass();
 	JOSDataClass dc = new JOSDataClass();
-	
+	JOSArrayClass ac = new JOSArrayClass();
+	JOSNestedArrayClass nac = new JOSNestedArrayClass();
+
 	boolean b = false;
 	char c = 'a';
 	byte bt = 1;
