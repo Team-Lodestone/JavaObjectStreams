@@ -16,6 +16,8 @@
 
 #include <assert.h>
 
+#include "JavaObject/type/primitive/PrimitiveTypeCodeParser.h"
+
 namespace javaobject::type::object::parsers {
     ClassDataParser::ClassDataParser(const std::shared_ptr<object::descriptor::ClassDescriptorInfoObject> &classDescInfo) : m_classDescInfo(classDescInfo) {
         // this->m_parsers = {{
@@ -46,11 +48,15 @@ namespace javaobject::type::object::parsers {
     std::shared_ptr<object::SerializableClassDataObject> ClassDataParser::parseSerializableClassData(type::object::ObjectTypeCodeParser &parser) const {
         auto d = std::make_shared<object::SerializableClassDataObject>();
 
+        auto primitiveParser = parser.parserStorage().primitiveParser;
+
         // BUG WORKAROUND, REMOVE AFTER WE FIND THE FIX
         parser.stream().seekRelative(-2);
         for (auto &[name, value] : this->m_classDescInfo->fields) {
             const auto typeCode = value->primitiveDescriptor->typeCode;
-            std::shared_ptr<primitive::types::IPrimitiveObject> obj = (*parser.primitiveTypeCodeParser().getParser(typeCode))(parser.primitiveTypeCodeParser());
+
+            //todo check this out since I can't easily see whats going on when using codewithme
+            std::shared_ptr<primitive::types::IPrimitiveObject> obj = primitiveParser->readUsingParser(*primitiveParser->getParser(typeCode));
 
             d->values.emplace(name, obj);
         }

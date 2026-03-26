@@ -13,7 +13,6 @@
 #include "JavaObject/type/ITypeCodeParser.h"
 #include "JavaObject/type/object/parsers/IObjectParser.h"
 #include "JavaObject/type/object/parsers/ReferenceParser.h"
-#include "JavaObject/type/primitive/PrimitiveTypeCodeParser.h"
 #include "JavaObject/util/SmartPointerCast.h"
 #include "types/ReferenceObject.h"
 
@@ -23,22 +22,19 @@
 #include <unordered_map>
 #include <variant>
 
+#include "JavaObject/type/ITypeCodeStorageHolder.h"
+
 namespace javaobject::type::primitive {
     class PrimitiveTypeCodeParser;
 }
 
 namespace javaobject::type::object {
-    class ObjectTypeCodeParser : public ITypeCodeParser<IObject, parsers::IObjectParser, EObjectTypeCode> {
+    class ObjectTypeCodeParser : public ITypeCodeParser<IObject, parsers::IObjectParser, EObjectTypeCode>, public ITypeCodeStorageHolder {
     public:
-        explicit ObjectTypeCodeParser(std::istream &input, HandleContainer &handleContainer);
+        explicit ObjectTypeCodeParser(std::istream &input, HandleContainer &handleContainer, TypeCodeParserStorage &parserStorage);
 
         std::shared_ptr<object::IObject> readNext() override;
         std::shared_ptr<object::IObject> readUsingParser(const object::parsers::IObjectParser &parser) override;
-
-        primitive::PrimitiveTypeCodeParser &primitiveTypeCodeParser();
-
-    private:
-        primitive::PrimitiveTypeCodeParser m_primitiveParser;
     };
 } // namespace javaobject::type
 

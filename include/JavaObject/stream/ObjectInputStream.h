@@ -30,7 +30,7 @@ namespace javaobject::stream {
         std::istream &m_input;
         bio::stream::BinaryInputStream m_stream;
 
-        type::object::ObjectTypeCodeParser m_parser;
+        type::TypeCodeParserStorage m_parsers;
     };
 
     //some people might prefer STL naming scheme for this, so why not:
