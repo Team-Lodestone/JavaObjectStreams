@@ -16,7 +16,9 @@
 
 #include <assert.h>
 
+#include "JavaObject/type/object/types/EndBlockDataObject.h"
 #include "JavaObject/type/primitive/PrimitiveTypeCodeParser.h"
+#include "JavaObject/type/object/types/AnnotationObject.h"
 
 namespace javaobject::type::object::parsers {
     ClassDataParser::ClassDataParser(const std::shared_ptr<object::descriptor::ClassDescriptorInfoObject> &classDescInfo) : m_classDescInfo(classDescInfo) {
@@ -51,7 +53,7 @@ namespace javaobject::type::object::parsers {
         auto primitiveParser = parser.parserStorage().primitiveParser;
 
         // BUG WORKAROUND, REMOVE AFTER WE FIND THE FIX
-        parser.stream().seekRelative(-2);
+        // parser.stream().seekRelative(-2);
         for (auto &[name, value] : this->m_classDescInfo->fields) {
             const auto typeCode = value->primitiveDescriptor->typeCode;
 
@@ -65,7 +67,19 @@ namespace javaobject::type::object::parsers {
     }
 
     std::shared_ptr<object::SerializableWriteMethodClassDataObject> ClassDataParser::parseSerializableWriteMethodClassData(type::object::ObjectTypeCodeParser &parser) const {
+        std::shared_ptr<object::SerializableClassDataObject> sd = this->parseSerializableClassData(parser);
 
+        std::vector<std::shared_ptr<IObject>> contents;
+
+        std::shared_ptr<IObject> obj = parser.parserStorage().objectParser->readNext();
+        while (typeid(*obj.get()) != typeid(types::EndBlockDataObject)) {
+            std::cout << typeid(obj).name() << std::endl;
+            contents.push_back(obj);
+
+            obj = parser.parserStorage().objectParser->readNext();
+        }
+
+        return std::make_shared<object::SerializableWriteMethodClassDataObject>(std::move(sd), std::make_shared<AnnotationObject>(contents));
     }
 
     std::shared_ptr<object::ExternalizableClassDataObject> ClassDataParser::parseExternalizableClassData(type::object::ObjectTypeCodeParser &parser) const {

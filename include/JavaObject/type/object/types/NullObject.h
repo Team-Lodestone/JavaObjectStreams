@@ -14,7 +14,9 @@
 #include "IObject.h"
 
 namespace javaobject::type::object {
-    class NullObject : public IObject {};
+    class NullObject : public IObject {
+        std::string toString() override;
+    };
 } // namespace javaobject::type::object
 
 #endif // JAVAOBJECTSTREAMS_NULLOBJECT_H

@@ -10,21 +10,24 @@
  */
 #include "JavaObject/type/HandleContainer.h"
 
+#include <format>
 #include <iostream>
 
 namespace javaobject::type {
     void HandleContainer::registerHandle(const std::shared_ptr<object::IObject> &object) {
-        this->m_handles[m_nextHandle] = object;
-        std::cout << "new handle: " << m_nextHandle << std::endl;
+        this->m_handles.emplace(m_nextHandle, object);
+        std::cout << std::format("new handle at {:#05x}: {}", m_nextHandle, object->toString()) << std::endl;
 
         this->m_nextHandle++;
     }
 
     std::shared_ptr<object::IObject> HandleContainer::resolveHandle(const object::ReferenceObject::handle_t handle) {
         if (const auto it = m_handles.find(handle); it != this->m_handles.end()) {
+            std::cout << std::format("resolved handle at {:#05x}: {}", m_nextHandle, it->second->toString()) << std::endl;
             return it->second;
         }
 
+        static_assert("We should never be missing a handle!!!!");
         return nullptr;
     }
 

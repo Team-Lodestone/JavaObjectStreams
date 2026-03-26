@@ -33,6 +33,8 @@ namespace javaobject::type::object::descriptor {
             SC_ENUM = 0x10
         };
 
+        std::string toString() override;
+
         std::int8_t flags;
         // field -> value
         // nvm since we have to store field values separately, we will just key them by field name there.

@@ -11,6 +11,8 @@
 package me.dexrn.jos.common.test;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class JOSTestClass implements Serializable {
 	public class Subclass implements Serializable {
@@ -35,4 +37,10 @@ public class JOSTestClass implements Serializable {
 	long l = 4;
 	float f = 5.0f;
 	double d = 6.0;
+	String str = "Hello, world!";
+	
+	List<Character> carr = new ArrayList<Character>();
+	{
+		str.chars().forEach(c -> carr.add((char) c));
+	}
 }

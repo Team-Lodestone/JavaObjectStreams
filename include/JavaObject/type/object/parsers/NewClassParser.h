@@ -14,9 +14,7 @@
 namespace javaobject {
     namespace type {
         namespace parser {
-
             class NewClassParser {};
-
         } // namespace parser
     } // namespace type
 } // namespace javaobject

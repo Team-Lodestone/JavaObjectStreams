@@ -18,32 +18,57 @@
 #include <unordered_map>
 #include <string>
 
-namespace javaobject::type::object {
-    struct ClassDataObject : public IObject {};
+namespace javaobject::type::object
+{
+    struct ClassDataObject : public IObject
+    {
+    };
 
     //nowrclass
-    struct SerializableClassDataObject : public ClassDataObject {
+    struct SerializableClassDataObject : public ClassDataObject
+    {
         SerializableClassDataObject() = default;
-        explicit SerializableClassDataObject(const std::unordered_map<std::string, std::shared_ptr<primitive::types::IPrimitiveObject>> &values) : values(values) {}
+
+        explicit SerializableClassDataObject(
+            const std::unordered_map<std::string, std::shared_ptr<primitive::types::IPrimitiveObject>>&
+            values) : values(values)
+        {
+        }
 
         std::unordered_map<std::string, std::shared_ptr<primitive::types::IPrimitiveObject>> values;
     };
 
     //wrclass, objectAnnotation
-    struct SerializableWriteMethodClassDataObject : public SerializableClassDataObject {
+    struct SerializableWriteMethodClassDataObject : public SerializableClassDataObject
+    {
+        SerializableWriteMethodClassDataObject(
+            const std::shared_ptr<SerializableClassDataObject>& base,
+            const std::shared_ptr<AnnotationObject>& annotation)
+            : SerializableClassDataObject(*base), annotation(annotation)
+        {
+        }
+
+        SerializableWriteMethodClassDataObject(
+            const std::unordered_map<std::string, std::shared_ptr<primitive::types::IPrimitiveObject>>& values,
+            const std::shared_ptr<AnnotationObject>& annotation)
+            : SerializableClassDataObject(values), annotation(annotation)
+        {
+        }
+
         std::shared_ptr<AnnotationObject> annotation;
     };
 
     //externalContents
-    struct ExternalizableClassDataObject : ClassDataObject {
+    struct ExternalizableClassDataObject : ClassDataObject
+    {
         //TODO
     };
 
     //objectAnnotation
-    struct ExternalizableBlockDataClassDataObject : ClassDataObject {
+    struct ExternalizableBlockDataClassDataObject : ClassDataObject
+    {
         // TODO
     };
-
 } // namespace javaobject::type::object
 
 #endif // JAVAOBJECTSTREAMS_CLASSDATAOBJECT_H
