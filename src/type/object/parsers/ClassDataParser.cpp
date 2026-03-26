@@ -24,7 +24,8 @@
 #include <stack>
 
 namespace javaobject::type::object::parsers {
-    ClassDataParser::ClassDataParser(const std::shared_ptr<object::descriptor::ClassDescriptorInfoObject> &classDescInfo) : m_classDescInfo(classDescInfo) {
+    ClassDataParser::ClassDataParser(const std::shared_ptr<object::descriptor::ClassDescriptorInfoObject> &classDescInfo)
+        : m_classDescInfo(classDescInfo) {
         // this->m_parsers = {{
         //
         // }};
@@ -50,7 +51,8 @@ namespace javaobject::type::object::parsers {
         return std::make_unique<object::NullObject>();
     }
 
-    std::shared_ptr<object::SerializableClassDataObject> ClassDataParser::parseSerializableClassData(type::object::ObjectTypeCodeParser &parser) const {
+    std::shared_ptr<object::SerializableClassDataObject>
+    ClassDataParser::parseSerializableClassData(type::object::ObjectTypeCodeParser &parser) const {
         auto d = std::make_shared<object::SerializableClassDataObject>();
 
         auto primitiveParser = parser.parserStorage().primitiveParser;
@@ -74,7 +76,7 @@ namespace javaobject::type::object::parsers {
             for (auto &[name, value] : c->fields) {
                 const auto typeCode = value->primitiveDescriptor->typeCode;
 
-                //todo check this out since I can't easily see whats going on when using codewithme
+                // todo check this out since I can't easily see whats going on when using codewithme
                 std::shared_ptr<primitive::types::IPrimitiveObject> obj = primitiveParser->readUsingParser(*primitiveParser->getParser(typeCode));
 
                 d->values.emplace(name, obj);
@@ -84,14 +86,17 @@ namespace javaobject::type::object::parsers {
         return d;
     }
 
-    std::shared_ptr<object::SerializableWriteMethodClassDataObject> ClassDataParser::parseSerializableWriteMethodClassData(type::object::ObjectTypeCodeParser &parser) const {
+    std::shared_ptr<object::SerializableWriteMethodClassDataObject>
+    ClassDataParser::parseSerializableWriteMethodClassData(type::object::ObjectTypeCodeParser &parser) const {
         std::shared_ptr<object::SerializableClassDataObject> sd = this->parseSerializableClassData(parser);
 
         std::vector<std::shared_ptr<IObject>> contents;
 
         std::shared_ptr<IObject> obj = parser.parserStorage().objectParser->readNext();
         while (typeid(*obj.get()) != typeid(types::EndBlockDataObject)) {
+#ifdef DEBUG
             std::cout << typeid(obj).name() << std::endl;
+#endif
             contents.push_back(obj);
 
             obj = parser.parserStorage().objectParser->readNext();
@@ -100,11 +105,9 @@ namespace javaobject::type::object::parsers {
         return std::make_shared<object::SerializableWriteMethodClassDataObject>(std::move(sd), std::make_shared<AnnotationObject>(contents));
     }
 
-    std::shared_ptr<object::ExternalizableClassDataObject> ClassDataParser::parseExternalizableClassData(type::object::ObjectTypeCodeParser &parser) const {
+    std::shared_ptr<object::ExternalizableClassDataObject>
+    ClassDataParser::parseExternalizableClassData(type::object::ObjectTypeCodeParser &parser) const {}
 
-    }
-
-    std::shared_ptr<object::ExternalizableBlockDataClassDataObject> ClassDataParser::parseExternalizableBlockDataClassData(type::object::ObjectTypeCodeParser &parser) const {
-
-    }
+    std::shared_ptr<object::ExternalizableBlockDataClassDataObject>
+    ClassDataParser::parseExternalizableBlockDataClassData(type::object::ObjectTypeCodeParser &parser) const {}
 } // namespace javaobject::type::object::parsers

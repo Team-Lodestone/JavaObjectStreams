@@ -43,8 +43,10 @@ namespace javaobject::type::object {
     std::shared_ptr<object::IObject> ObjectTypeCodeParser::readNext() {
         const EObjectTypeCode tc = static_cast<EObjectTypeCode>(this->m_input.readByte());
 
+#ifdef DEBUG
         std::cout << "tc: " << static_cast<int>(tc) << std::endl;
         std::cout << "pos: " << this->m_input.getOffset() << std::endl;
+#endif
 
         if (const auto it = m_parsers.find(tc); it != this->m_parsers.end()) {
             return this->readUsingParser(*it->second);

@@ -10,4 +10,8 @@
  */
 #include "JavaObject/type/object/types/EndBlockDataObject.h"
 
-namespace javaobject::type::object::types {}
+namespace javaobject::type::object::types {
+    std::string EndBlockDataObject::toString() {
+        return "EndBlockDataObject";
+    }
+} // namespace javaobject::type::object::types

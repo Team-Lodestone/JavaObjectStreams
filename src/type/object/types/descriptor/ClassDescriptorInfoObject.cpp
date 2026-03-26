@@ -14,6 +14,6 @@
 
 namespace javaobject::type::object::descriptor {
     std::string ClassDescriptorInfoObject::toString() {
-        return std::format("ClassDescriptorInfoObject");
+        return std::format("ClassDescriptorInfoObject(fields={})", this->fields.size());
     }
 }

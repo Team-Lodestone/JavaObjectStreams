@@ -1,4 +1,4 @@
-/** @file ClassDescriptorObject.h
+/** @file NewClassDescriptorObject.h
  *
  * @author Dexrn ZacAttack
  * @date 3/24/26
@@ -40,4 +40,4 @@ namespace javaobject::type::object::descriptor {
     };
 } // namespace javaobject::type::object::descriptor
 
-#endif // JAVAOBJECTSTREAMS_CLASSDESCRIPTOROBJECT_H
+#endif //JAVAOBJECTSTREAMS_NEWCLASSDESCRIPTOROBJECT_H

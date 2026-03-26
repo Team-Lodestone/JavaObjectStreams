@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION VERSION 3.30)
-project(JavaObjectStreams VERSION 1.3.3)
+project(JavaObjectStreams VERSION 1.3.4)
 
 set(CMAKE_CXX_STANDARD 20)
 
@@ -144,6 +144,10 @@ add_library(JavaObjectStreams SHARED ${FILES})
 target_include_directories(JavaObjectStreams
         PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 )
+
+if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+    target_compile_definitions(JavaObjectStreams PRIVATE DEBUG)
+endif ()
 
 target_link_libraries(JavaObjectStreams PUBLIC bio-cpp20)
 

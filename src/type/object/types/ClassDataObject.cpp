@@ -10,4 +10,17 @@
  */
 #include "JavaObject/type/object/types/ClassDataObject.h"
 
-namespace javaobject::type::object {}
+#include <format>
+
+namespace javaobject::type::object {
+    std::string ClassDataObject::toString() {
+        return "ClassData";
+    }
+
+    std::string SerializableClassDataObject::toString() {
+        return std::format("SerializableClassData(values={})", this->values.size());
+    }
+    std::string SerializableWriteMethodClassDataObject::toString() {
+        return std::format("SerializableWriteMethodClassData(values={}, annotationContents={})", this->values.size(), this->annotation->contents.size());
+    }
+} // namespace javaobject::type::object

@@ -11,4 +11,11 @@
  */
 #include "JavaObject/type/object/types/descriptor/FieldDescriptorObject.h"
 
-namespace javaobject::type::object::descriptor {}
+namespace javaobject::type::object::descriptor {
+    std::string FieldDescriptorObject::toString() {
+        if (this->objectDescriptor != nullptr)
+            return std::format("FieldDescriptor(name=\"{}\", type={})", this->primitiveDescriptor->name, this->objectDescriptor->toString());
+
+        return std::format("FieldDescriptor(name=\"{}\", type={})", this->primitiveDescriptor->name, this->primitiveDescriptor->typeCode);
+    }
+} // namespace javaobject::type::object::descriptor

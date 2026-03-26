@@ -11,4 +11,11 @@
  */
 #include "JavaObject/type/object/types/descriptor/PrimitiveDescriptorObject.h"
 
-namespace javaobject::type::object::descriptor {}
+#include <format>
+#include "JavaObject/EPrimitiveTypeCode.h"
+
+namespace javaobject::type::object::descriptor {
+    std::string PrimitiveDescriptorObject::toString() {
+        return std::format("PrimitiveDescriptor(name=\"{}\", typecode={})", this->name, this->typeCode);
+    }
+} // namespace javaobject::type::object::descriptor

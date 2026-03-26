@@ -12,6 +12,6 @@
 
 namespace javaobject::type::object {
     std::string NullObject::toString() {
-        return "null";
+        return "NullObject";
     }
 }

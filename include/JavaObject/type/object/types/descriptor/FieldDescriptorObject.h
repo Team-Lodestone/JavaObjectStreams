@@ -22,6 +22,8 @@ namespace javaobject::type::object::descriptor {
             : primitiveDescriptor(std::move(primitiveDescriptor)),
               objectDescriptor(std::move(objectDescriptor)) {}
 
+        std::string toString() override;
+
         std::shared_ptr<PrimitiveDescriptorObject> primitiveDescriptor;
         std::shared_ptr<IObject> objectDescriptor; // nullptr if primitive type is not OBJECT, ARRAY
     };

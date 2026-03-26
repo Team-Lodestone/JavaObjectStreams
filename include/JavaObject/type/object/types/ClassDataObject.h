@@ -22,6 +22,7 @@ namespace javaobject::type::object
 {
     struct ClassDataObject : public IObject
     {
+        std::string toString() override;
     };
 
     //nowrclass
@@ -34,6 +35,8 @@ namespace javaobject::type::object
             values) : values(values)
         {
         }
+
+        std::string toString() override;
 
         std::unordered_map<std::string, std::shared_ptr<primitive::types::IPrimitiveObject>> values;
     };
@@ -54,6 +57,8 @@ namespace javaobject::type::object
             : SerializableClassDataObject(values), annotation(annotation)
         {
         }
+
+        std::string toString() override;
 
         std::shared_ptr<AnnotationObject> annotation;
     };

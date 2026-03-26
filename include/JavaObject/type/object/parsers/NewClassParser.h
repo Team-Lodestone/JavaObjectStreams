@@ -11,12 +11,8 @@
 #ifndef JAVAOBJECTSTREAMS_NEWCLASSPARSER_H
 #define JAVAOBJECTSTREAMS_NEWCLASSPARSER_H
 
-namespace javaobject {
-    namespace type {
-        namespace parser {
-            class NewClassParser {};
-        } // namespace parser
-    } // namespace type
-} // namespace javaobject
+namespace javaobject::type::parser {
+    class NewClassParser {};
+} // namespace javaobject::type::parser
 
 #endif // JAVAOBJECTSTREAMS_NEWCLASSPARSER_H

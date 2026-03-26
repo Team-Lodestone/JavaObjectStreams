@@ -10,8 +10,8 @@
 * @copyright Copyright (c) 2026 Team Lodestone
 * @license This project is licensed under the LGPL 3.0 license, see the LICENSE file for details.
 */
-#ifndef PROJECTLODESTONE_PRIMITIVEJAVAOBJECTPARSER_H
-#define PROJECTLODESTONE_PRIMITIVEJAVAOBJECTPARSER_H
+#ifndef JAVAOBJECTSTREAMS_PRIMITIVEJAVAOBJECTPARSER_H
+#define JAVAOBJECTSTREAMS_PRIMITIVEJAVAOBJECTPARSER_H
 #include "IPrimitiveObjectParser.h"
 
 namespace javaobject::type::primitive::parsers {
@@ -20,4 +20,4 @@ namespace javaobject::type::primitive::parsers {
     };
 }
 
-#endif //PROJECTLODESTONE_PRIMITIVEJAVAOBJECTPARSER_H
+#endif //JAVAOBJECTSTREAMS_PRIMITIVEJAVAOBJECTPARSER_H

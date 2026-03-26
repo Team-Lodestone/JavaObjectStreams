@@ -10,7 +10,6 @@
  */
 #ifndef JAVAOBJECTSTREAMS_ARRAYOBJECT_H
 #define JAVAOBJECTSTREAMS_ARRAYOBJECT_H
-#include "BinaryIO/container/FixedArray.h"
 #include "JavaObject/type/object/types/IObject.h"
 #include "JavaObject/type/object/types/descriptor/NewClassDescriptorObject.h"
 #include "JavaObject/type/primitive/types/IPrimitiveObject.h"

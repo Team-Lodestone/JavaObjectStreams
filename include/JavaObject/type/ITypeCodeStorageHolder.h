@@ -8,8 +8,8 @@
 * @copyright Copyright (c) 2026 Team Lodestone
 * @license This project is licensed under the LGPL 3.0 license, see the LICENSE file for details.
 */
-#ifndef PROJECTLODESTONE_ITYPECODESTORAGEHOLDER_H
-#define PROJECTLODESTONE_ITYPECODESTORAGEHOLDER_H
+#ifndef JAVAOBJECTSTREAMS_ITYPECODESTORAGEHOLDER_H
+#define JAVAOBJECTSTREAMS_ITYPECODESTORAGEHOLDER_H
 #include "TypeCodeParserStorage.h"
 
 namespace javaobject::type {
@@ -24,4 +24,4 @@ namespace javaobject::type {
     };
 }
 
-#endif //PROJECTLODESTONE_ITYPECODESTORAGEHOLDER_H
+#endif //JAVAOBJECTSTREAMS_ITYPECODESTORAGEHOLDER_H

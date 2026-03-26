@@ -20,6 +20,8 @@ namespace javaobject::type::object {
     struct Object : public IObject {
         Object(std::shared_ptr<object::IObject> &&clazz, std::shared_ptr<object::IObject> &&classData);
 
+        std::string toString() override;
+
         std::shared_ptr<IObject> clazz;
         std::shared_ptr<IObject> classData; // todo use right type
     };

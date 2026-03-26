@@ -2,7 +2,7 @@ name: Deploy Doxygen page
 on:
   push:
     branches:
-      - pr/rewrite
+      - main
 
 permissions:
   contents: read

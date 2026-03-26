@@ -11,7 +11,13 @@
  */
 #include "JavaObject/type/object/types/Object.h"
 
+#include <format>
+
 namespace javaobject::type::object {
     Object::Object(std::shared_ptr<object::IObject> &&clazz, std::shared_ptr<object::IObject> &&classData)
         : clazz(std::move(clazz)), classData(std::move(classData)) {}
+
+    std::string Object::toString() {
+        return std::format("Object(class={}, data={})", clazz->toString(), classData != nullptr ? classData->toString() : "null");
+    }
 } // namespace javaobject::type::object

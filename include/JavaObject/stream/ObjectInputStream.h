@@ -10,8 +10,8 @@
  */
 #ifndef JAVAOBJECTSTREAMS_OBJECTINPUTSTREAM_H
 #define JAVAOBJECTSTREAMS_OBJECTINPUTSTREAM_H
-#include "../type/object/ObjectTypeCodeParser.h"
-#include "../type/object/types/IObject.h"
+#include "JavaObject/type/object/ObjectTypeCodeParser.h"
+#include "JavaObject/type/object/types/IObject.h"
 
 #include <iostream>
 #include <memory>

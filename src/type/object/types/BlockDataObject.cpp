@@ -8,13 +8,12 @@
  * @copyright Copyright (c) 2026 Team Lodestone
  * @license This project is licensed under the MIT license, see the LICENSE file for details.
  */
-#include "../../../../include/JavaObject/type/object/types/BlockDataObject.h"
+#include "JavaObject/type/object/types/BlockDataObject.h"
 
-namespace javaobject {
-    namespace type {
-        namespace object {
-            namespace parsers {
-            } // parsers
-        } // object
-    } // type
-} // javaobject
+#include <format>
+
+namespace javaobject::type::object::parsers {
+    std::string BlockDataObject::toString() {
+        return std::format("BlockData(size={})", this->data.size());
+    }
+} // namespace javaobject::type::object::parsers

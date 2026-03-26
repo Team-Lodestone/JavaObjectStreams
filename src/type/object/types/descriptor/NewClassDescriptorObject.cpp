@@ -15,6 +15,6 @@
 
 namespace javaobject::type::object::descriptor {
     std::string NewClassDescriptorObject::toString() {
-        return std::format("NewClassDescriptorObject(\nname={}\nuid={:#05x}\ninfo={}\n)", this->name, this->serialVersionUid, this->info != nullptr ? this->info->toString() : "null");
+        return std::format("NewClassDescriptorObject(name=\"{}\", uid={:#08x}, info={})", this->name, this->serialVersionUid, this->info != nullptr ? this->info->toString() : "null");
     }
 }

@@ -13,6 +13,6 @@
 
 namespace javaobject::type::object {
     std::string IObject::toString() {
-        return "Object";
+        return "IObject";
     }
 }

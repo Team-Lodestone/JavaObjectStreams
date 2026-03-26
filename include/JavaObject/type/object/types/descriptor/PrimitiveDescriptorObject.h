@@ -20,6 +20,8 @@ namespace javaobject::type::object::descriptor {
     struct PrimitiveDescriptorObject : public IObject {
         PrimitiveDescriptorObject(const EPrimitiveTypeCode typeCode, const std::string &name) : typeCode(typeCode), name(name) {}
 
+        std::string toString() override;
+
         EPrimitiveTypeCode typeCode;
         std::string name;
     };

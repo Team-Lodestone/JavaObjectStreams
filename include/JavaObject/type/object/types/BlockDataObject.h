@@ -21,6 +21,8 @@ namespace javaobject::type::object::parsers {
             : data(data) {
         }
 
+        std::string toString() override;
+
         std::vector<std::int8_t> data;
     };
 }

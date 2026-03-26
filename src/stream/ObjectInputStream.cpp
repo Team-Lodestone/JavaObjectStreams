@@ -20,8 +20,7 @@ namespace javaobject::stream {
     }
 
     std::shared_ptr<type::object::IObject> ObjectInputStream::readObject() {
-        const uint16_t magic = this->m_stream.readBE<uint16_t>();
-        if (magic != 0xACED) {
+        if (const uint16_t magic = this->m_stream.readBE<uint16_t>(); magic != 0xACED) {
             return std::make_shared<type::object::NullObject>();
         }
 

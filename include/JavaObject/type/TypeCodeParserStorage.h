@@ -8,8 +8,8 @@
 * @copyright Copyright (c) 2026 Team Lodestone
 * @license This project is licensed under the LGPL 3.0 license, see the LICENSE file for details.
 */
-#ifndef PROJECTLODESTONE_TYPECODESTORAGE_H
-#define PROJECTLODESTONE_TYPECODESTORAGE_H
+#ifndef JAVAOBJECTSTREAMS_TYPECODESTORAGE_H
+#define JAVAOBJECTSTREAMS_TYPECODESTORAGE_H
 #include <memory>
 
 
@@ -28,4 +28,4 @@ namespace javaobject::type {
     };
 }
 
-#endif //PROJECTLODESTONE_TYPECODESTORAGE_H
+#endif //JAVAOBJECTSTREAMS_TYPECODESTORAGE_H

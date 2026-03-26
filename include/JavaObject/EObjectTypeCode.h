@@ -1,4 +1,4 @@
-/** @file EJavaTypeCode.h
+/** @file EObjectTypeCode.h
  *
  * @author DexrnZacAttack
  * @date 3/23/26
@@ -8,8 +8,8 @@
  * @copyright Copyright (c) 2026 Team Lodestone
  * @license This project is licensed under the MIT license, see the LICENSE file for details.
  */
-#ifndef JAVAOBJECTSTREAMS_EJAVATYPECODE_H
-#define JAVAOBJECTSTREAMS_EJAVATYPECODE_H
+#ifndef JAVAOBJECTSTREAMS_EOBJECTTYPECODE_H
+#define JAVAOBJECTSTREAMS_EOBJECTTYPECODE_H
 
 enum class EObjectTypeCode : signed char {
   TC_NULL = 0x70,
@@ -32,4 +32,4 @@ enum class EObjectTypeCode : signed char {
   TC_MAX = TC_ENUM // highest value
 };
 
-#endif // JAVAOBJECTSTREAMS_EJAVATYPECODE_H
+#endif // JAVAOBJECTSTREAMS_EOBJECTTYPECODE_H

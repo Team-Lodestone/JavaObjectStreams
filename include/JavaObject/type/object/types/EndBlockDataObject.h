@@ -13,7 +13,9 @@
 #include "JavaObject/type/object/types/IObject.h"
 
 namespace javaobject::type::object::types {
-    struct EndBlockDataObject : IObject {};
+    struct EndBlockDataObject : IObject {
+        std::string toString() override;
+    };
 }
 
 #endif //JAVAOBJECTSTREAMS_ENDBLOCKDATAOBJECT_H
