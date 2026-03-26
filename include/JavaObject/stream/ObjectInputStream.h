@@ -24,6 +24,8 @@ namespace javaobject::stream {
         explicit ObjectInputStream(std::istream &input);
 
         std::shared_ptr<type::object::IObject> readObject();
+
+        ObjectInputStream &operator>>(std::shared_ptr<type::object::IObject> &object);
     private:
         type::HandleContainer m_handleContainer;
 

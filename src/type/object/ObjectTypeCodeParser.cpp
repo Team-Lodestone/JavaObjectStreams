@@ -7,6 +7,8 @@
  */
 #include "JavaObject/type/object/ObjectTypeCodeParser.h"
 
+#include "JavaObject/type/object/parsers/ArrayObjectParser.h"
+
 #include <cassert>
 #include <format>
 
@@ -35,6 +37,7 @@ namespace javaobject::type::object {
         this->m_parsers[EObjectTypeCode::TC_BLOCKDATA] = std::make_unique<object::parsers::ShortBlockDataObjectParser>();
         this->m_parsers[EObjectTypeCode::TC_BLOCKDATALONG] = std::make_unique<object::parsers::LongBlockDataObjectParser>();
         this->m_parsers[EObjectTypeCode::TC_NULL] = std::make_unique<parsers::NullObjectParser>();
+        this->m_parsers[EObjectTypeCode::TC_ARRAY] = std::make_unique<parsers::ArrayObjectParser>();
     }
 
     std::shared_ptr<object::IObject> ObjectTypeCodeParser::readNext() {

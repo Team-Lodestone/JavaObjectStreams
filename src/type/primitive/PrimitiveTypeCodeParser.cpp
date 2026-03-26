@@ -11,6 +11,7 @@
 #include "JavaObject/type/primitive/PrimitiveTypeCodeParser.h"
 
 #include "JavaObject/type/object/ObjectTypeCodeParser.h"
+#include "JavaObject/type/primitive/parsers/PrimitiveArrayObjectParser.h"
 #include "JavaObject/type/primitive/parsers/PrimitiveBooleanObjectParser.h"
 #include "JavaObject/type/primitive/parsers/PrimitiveByteObjectParser.h"
 #include "JavaObject/type/primitive/parsers/PrimitiveCharObjectParser.h"
@@ -32,7 +33,7 @@ namespace javaobject::type::primitive {
         this->m_parsers[EPrimitiveTypeCode::TYPE_INT] = std::make_unique<parsers::PrimitiveIntegerObjectParser>();
         this->m_parsers[EPrimitiveTypeCode::TYPE_LONG] = std::make_unique<parsers::PrimitiveLongObjectParser>();
         this->m_parsers[EPrimitiveTypeCode::TYPE_SHORT] = std::make_unique<parsers::PrimitiveShortObjectParser>();
-        // this->m_parsers[EPrimitiveTypeCode::TYPE_ARRAY] = std::make_unique<parsers::PrimitiveByteObjectParser>();
+        this->m_parsers[EPrimitiveTypeCode::TYPE_ARRAY] = std::make_unique<parsers::PrimitiveArrayObjectParser>();
         this->m_parsers[EPrimitiveTypeCode::TYPE_OBJECT] = std::make_unique<parsers::PrimitiveJavaObjectParser>();
     }
 
