@@ -40,7 +40,7 @@ public class JOSTestClass implements Serializable {
 	float f = 5.0f;
 	double d = 6.0;
 	String str = "Hello, world!";
-	
+
 	List<Character> carr = new ArrayList<Character>();
 	{
 		str.chars().forEach(c -> carr.add((char) c));
