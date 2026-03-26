@@ -10,10 +10,14 @@
  */
 #ifndef JAVAOBJECTSTREAMS_PRIMITIVEJAVAOBJECT_H
 #define JAVAOBJECTSTREAMS_PRIMITIVEJAVAOBJECT_H
+#include "JavaObject/type/object/types/IObject.h"
 #include "JavaObject/type/primitive/types/IPrimitiveObject.h"
+#include <memory>
 
 namespace javaobject::type::primitive::types {
-    struct PrimitiveJavaObject : IPrimitiveObject {
+    struct PrimitiveJavaObject : IPrimitiveTypeObject<std::shared_ptr<object::IObject>> {
+        explicit PrimitiveJavaObject(const std::shared_ptr<object::IObject> &obj) : IPrimitiveTypeObject(obj) {}
+
         EPrimitiveTypeCode typeCode() override;
     };
 } // namespace javaobject::type::primitive::types

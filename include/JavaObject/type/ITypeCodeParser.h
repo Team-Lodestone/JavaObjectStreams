@@ -35,7 +35,7 @@ namespace javaobject::type {
         std::shared_ptr<T> readAsUsingParser(const ParserT &parser) {
             return std::static_pointer_cast<T>(this->readUsingParser(parser));
         }
-        
+
         ParserT *getParser(const TypeCodeT typeCode) {
             if (const auto it = m_parsers.find(typeCode); it != this->m_parsers.end()) {
                 return it->second.get();

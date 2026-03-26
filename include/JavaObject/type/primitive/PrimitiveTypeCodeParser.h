@@ -17,10 +17,19 @@
 #include "JavaObject/type/primitive/parsers/IPrimitiveObjectParser.h"
 #include "JavaObject/type/primitive/types/IPrimitiveObject.h"
 
+#include <memory>
+
+#include "JavaObject/type/ITypeCodeStorageHolder.h"
+#include "JavaObject/type/TypeCodeParserStorage.h"
+
+namespace javaobject::type::object {
+    class ObjectTypeCodeParser;
+}
+
 namespace javaobject::type::primitive {
-    class PrimitiveTypeCodeParser : public ITypeCodeParser<types::IPrimitiveObject, parsers::IPrimitiveObjectParser, EPrimitiveTypeCode> {
+    class PrimitiveTypeCodeParser : public ITypeCodeParser<types::IPrimitiveObject, parsers::IPrimitiveObjectParser, EPrimitiveTypeCode>, public ITypeCodeStorageHolder {
     public:
-        explicit PrimitiveTypeCodeParser(std::istream &input, HandleContainer &handleContainer);
+        PrimitiveTypeCodeParser(std::istream &input, HandleContainer &handleContainer, TypeCodeParserStorage &parserStorage);
 
         std::shared_ptr<types::IPrimitiveObject> readNext() override;
         std::shared_ptr<types::IPrimitiveObject> readUsingParser(const parsers::IPrimitiveObjectParser &parser) override;

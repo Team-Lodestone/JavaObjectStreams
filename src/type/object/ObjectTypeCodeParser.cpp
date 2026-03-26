@@ -6,6 +6,7 @@
  * @device zPc-i2
  */
 #include "JavaObject/type/object/ObjectTypeCodeParser.h"
+#include "JavaObject/type/primitive/PrimitiveTypeCodeParser.h"
 
 #include "JavaObject/type/object/types/NullObject.h"
 #include "JavaObject/type/object/parsers/ObjectParser.h"
@@ -17,7 +18,7 @@
 #include <istream>
 
 namespace javaobject::type::object {
-    ObjectTypeCodeParser::ObjectTypeCodeParser(std::istream &input, HandleContainer &handleContainer) : ITypeCodeParser(input, handleContainer), m_primitiveParser(input, handleContainer) {
+    ObjectTypeCodeParser::ObjectTypeCodeParser(std::istream &input, HandleContainer &handleContainer, TypeCodeParserStorage &parserStorage) : ITypeCodeParser(input, handleContainer), ITypeCodeStorageHolder(parserStorage) {
         this->m_parsers[EObjectTypeCode::TC_STRING] = std::make_unique<object::parsers::StringParser>();
         this->m_parsers[EObjectTypeCode::TC_OBJECT] = std::make_unique<object::parsers::ObjectParser>();
         this->m_parsers[EObjectTypeCode::TC_CLASSDESC] = std::make_unique<object::parsers::descriptor::ClassDescriptorParser>();
@@ -34,8 +35,7 @@ namespace javaobject::type::object {
         return std::make_shared<object::NullObject>();
     }
 
-    std::shared_ptr<object::IObject> ObjectTypeCodeParser::readUsingParser(const object::parsers::IObjectParser &parser) { return parser(*this); }
-    primitive::PrimitiveTypeCodeParser &ObjectTypeCodeParser::primitiveTypeCodeParser() {
-        return this->m_primitiveParser;
+    std::shared_ptr<object::IObject> ObjectTypeCodeParser::readUsingParser(const object::parsers::IObjectParser &parser) {
+        return parser(*this);
     }
 } // namespace javaobject::type
