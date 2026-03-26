@@ -29,4 +29,10 @@ namespace javaobject::stream {
 
         return this->m_parsers.objectParser->readNext();
     }
+
+    ObjectInputStream &ObjectInputStream::operator>>(std::shared_ptr<type::object::IObject> &object) {
+        object = this->readObject();
+
+        return *this;
+    }
 } // namespace javaobject::stream
