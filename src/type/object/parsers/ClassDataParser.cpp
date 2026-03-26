@@ -16,9 +16,12 @@
 
 #include <assert.h>
 
-#include "JavaObject/type/object/types/EndBlockDataObject.h"
-#include "JavaObject/type/primitive/PrimitiveTypeCodeParser.h"
 #include "JavaObject/type/object/types/AnnotationObject.h"
+#include "JavaObject/type/object/types/EndBlockDataObject.h"
+#include "JavaObject/type/object/types/descriptor/NewClassDescriptorObject.h"
+#include "JavaObject/type/primitive/PrimitiveTypeCodeParser.h"
+
+#include <stack>
 
 namespace javaobject::type::object::parsers {
     ClassDataParser::ClassDataParser(const std::shared_ptr<object::descriptor::ClassDescriptorInfoObject> &classDescInfo) : m_classDescInfo(classDescInfo) {
@@ -52,16 +55,31 @@ namespace javaobject::type::object::parsers {
 
         auto primitiveParser = parser.parserStorage().primitiveParser;
 
-        // BUG WORKAROUND, REMOVE AFTER WE FIND THE FIX
-        // parser.stream().seekRelative(-2);
-        for (auto &[name, value] : this->m_classDescInfo->fields) {
-            const auto typeCode = value->primitiveDescriptor->typeCode;
+        std::deque<std::shared_ptr<descriptor::ClassDescriptorInfoObject>> tree;
 
-            //todo check this out since I can't easily see whats going on when using codewithme
-            std::shared_ptr<primitive::types::IPrimitiveObject> obj = primitiveParser->readUsingParser(*primitiveParser->getParser(typeCode));
+        std::shared_ptr<IObject> super = this->m_classDescInfo;
+        while (typeid(*super) != typeid(NullObject)) {
+            auto sp = std::static_pointer_cast<descriptor::ClassDescriptorInfoObject>(super);
+            tree.push_front(sp);
 
-            d->values.emplace(name, obj);
+            auto nsp = std::dynamic_pointer_cast<descriptor::NewClassDescriptorObject>(sp->superClassDescriptor);
+            if (nsp == nullptr) {
+                break;
+            }
+
+            super = nsp->info;
         }
+
+        std::ranges::for_each(tree, [primitiveParser, &d](const std::shared_ptr<descriptor::ClassDescriptorInfoObject> &c) {
+            for (auto &[name, value] : c->fields) {
+                const auto typeCode = value->primitiveDescriptor->typeCode;
+
+                //todo check this out since I can't easily see whats going on when using codewithme
+                std::shared_ptr<primitive::types::IPrimitiveObject> obj = primitiveParser->readUsingParser(*primitiveParser->getParser(typeCode));
+
+                d->values.emplace(name, obj);
+            }
+        });
 
         return d;
     }
