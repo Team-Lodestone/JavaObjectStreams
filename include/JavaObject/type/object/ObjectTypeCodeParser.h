@@ -23,6 +23,10 @@
 #include <unordered_map>
 #include <variant>
 
+namespace javaobject::type::primitive {
+    class PrimitiveTypeCodeParser;
+}
+
 namespace javaobject::type::object {
     class ObjectTypeCodeParser : public ITypeCodeParser<IObject, parsers::IObjectParser, EObjectTypeCode> {
     public:
