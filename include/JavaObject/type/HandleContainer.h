@@ -28,7 +28,7 @@ namespace javaobject::type {
     private:
         /** Links handles to objects by pointer, these objects are expected to be stored already, otherwise it would leave a dangling/invalid pointer. */
         std::unordered_map<object::ReferenceObject::handle_t, std::shared_ptr<object::IObject>> m_handles;
-        object::ReferenceObject::handle_t m_nextHandle = 0x7E000000;
+        object::ReferenceObject::handle_t m_nextHandle = 0x007E0000;
     };
 } // namespace javaobject::type
 

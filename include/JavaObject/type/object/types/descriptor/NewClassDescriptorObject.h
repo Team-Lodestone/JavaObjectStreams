@@ -26,10 +26,12 @@ namespace javaobject::type::object::descriptor {
         // TODO
     };
 
-    class NewClassDescriptorObject : public IObject {
+    struct NewClassDescriptorObject : IObject {
       public:
         NewClassDescriptorObject(const std::string &name, const std::uint64_t serialVersionUid, std::shared_ptr<ClassDescriptorInfoObject> info)
             : name(name), serialVersionUid(serialVersionUid), info(std::move(info)) {}
+
+        std::string toString() override;
 
         std::string name;
         std::uint64_t serialVersionUid;

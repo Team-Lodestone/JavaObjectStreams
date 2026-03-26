@@ -11,6 +11,12 @@
  */
 #include "JavaObject/type/object/types/StringObject.h"
 
+#include <format>
+
 namespace javaobject::type::object {
     StringObject::StringObject(const std::string &value) : value(value) {}
+
+    std::string StringObject::toString() {
+        return std::format("String(\"{}\")", this->value);
+    }
 } // namespace javaobject::type::object

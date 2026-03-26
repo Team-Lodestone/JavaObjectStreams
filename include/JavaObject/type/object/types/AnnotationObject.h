@@ -13,13 +13,13 @@
 #include "IObject.h"
 
 #include <memory>
+#include <vector>
 
 namespace javaobject::type::object {
-    struct AnnotationObject : public IObject {
-        AnnotationObject(std::shared_ptr<IObject> type, std::shared_ptr<IObject> value) : type(std::move(type)), value(std::move(value)) {}
+    struct AnnotationObject : IObject {
+        explicit AnnotationObject(const std::vector<std::shared_ptr<IObject>>& contents) : contents(contents) {}
 
-        std::shared_ptr<IObject> type;
-        std::shared_ptr<IObject> value; // only present if type != TC_ENDBLOCKDATA
+        std::vector<std::shared_ptr<IObject>> contents;
     };
 } // namespace javaobject::type::object
 

@@ -11,10 +11,11 @@
 #ifndef JAVAOBJECTSTREAMS_CLASSDATAPARSER_H
 #define JAVAOBJECTSTREAMS_CLASSDATAPARSER_H
 #include "../types/ClassDataObject.h"
-#include "JavaObject/type/object/types/descriptor/ClassDescriptorObject.h"
 #include "JavaObject/type/object/parsers/IObjectParser.h"
 
 #include <functional>
+
+#include "JavaObject/type/object/types/descriptor/ClassDescriptorInfoObject.h"
 
 namespace javaobject::type::object::parsers {
     struct ClassDataParser : public IObjectParser {

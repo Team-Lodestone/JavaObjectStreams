@@ -16,7 +16,7 @@
 
 namespace javaobject::type::primitive::parsers {
     struct PrimitiveArrayObjectParser : IPrimitiveObjectParser {
-        //todo
+        std::shared_ptr<types::IPrimitiveObject> operator()(PrimitiveTypeCodeParser& parser) const override;
     };
 }
 

@@ -11,4 +11,10 @@
  */
 #include "JavaObject/type/object/types/descriptor/NewClassDescriptorObject.h"
 
-namespace javaobject::type::object::descriptor {}
+#include <format>
+
+namespace javaobject::type::object::descriptor {
+    std::string NewClassDescriptorObject::toString() {
+        return std::format("NewClassDescriptorObject(\nname={}\nuid={:#05x}\ninfo={}\n)", this->name, this->serialVersionUid, this->info != nullptr ? this->info->toString() : "null");
+    }
+}

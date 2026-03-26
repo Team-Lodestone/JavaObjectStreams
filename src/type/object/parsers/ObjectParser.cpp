@@ -15,12 +15,17 @@
 #include "JavaObject/type/object/parsers/ClassDataParser.h"
 #include "JavaObject/type/object/types/NullObject.h"
 #include "JavaObject/type/object/types/Object.h"
+#include "JavaObject/type/object/types/descriptor/NewClassDescriptorObject.h"
 
 namespace javaobject::type::object::parsers {
     std::shared_ptr<object::IObject> ObjectParser::operator()(type::object::ObjectTypeCodeParser &parser) const {
-        std::shared_ptr<object::IObject> obj = parser.readNext();
-        std::shared_ptr<IObject> data = ClassDataParser(std::static_pointer_cast<descriptor::ClassDescriptorObject>(obj)->desc->info)(parser);
+        std::shared_ptr<object::Object> obj = std::make_shared<Object>(std::make_shared<NullObject>(), std::make_shared<NullObject>());
 
-        return std::make_shared<object::Object>(std::move(obj), std::make_shared<object::NullObject>());
+        obj->clazz = parser.readNext();
+        parser.handleContainer().registerHandle(obj);
+
+        obj->classData = ClassDataParser(std::static_pointer_cast<descriptor::NewClassDescriptorObject>(obj->clazz)->info)(parser);
+
+        return obj;
     }
 } // namespace javaobject::type::object::parsers

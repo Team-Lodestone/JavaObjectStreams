@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION VERSION 3.30)
-project(JavaObjectStreams VERSION 1.2.1)
+project(JavaObjectStreams VERSION 1.3.0)
 
 set(CMAKE_CXX_STANDARD 20)
 
@@ -54,10 +54,6 @@ set(FILES
         include/JavaObject/type/object/types/AnnotationObject.h
         src/type/object/parsers/ClassDataParser.cpp
         include/JavaObject/type/object/parsers/ClassDataParser.h
-        src/type/object/types/descriptor/ClassDescriptorObject.cpp
-        include/JavaObject/type/object/types/descriptor/ClassDescriptorObject.h
-        src/type/object/parsers/descriptor/ClassDescriptorParser.cpp
-        include/JavaObject/type/object/parsers/descriptor/ClassDescriptorParser.h
         src/type/object/types/ReferenceObject.cpp
         include/JavaObject/type/object/types/ReferenceObject.h
         src/type/object/parsers/ReferenceParser.cpp
@@ -122,6 +118,21 @@ set(FILES
         include/JavaObject/type/primitive/parsers/PrimitiveJavaObjectParser.h
         src/type/primitive/parsers/PrimitiveArrayObjectParser.cpp
         include/JavaObject/type/primitive/parsers/PrimitiveArrayObjectParser.h
+        src/type/object/types/EndBlockDataObject.cpp
+        include/JavaObject/type/object/types/EndBlockDataObject.h
+        src/type/object/parsers/EndBlockDataObjectParser.cpp
+        include/JavaObject/type/object/parsers/EndBlockDataObjectParser.h
+        src/type/object/types/BlockDataObject.cpp
+        include/JavaObject/type/object/types/BlockDataObject.h
+        src/type/object/parsers/ShortBlockDataObjectParser.cpp
+        include/JavaObject/type/object/parsers/ShortBlockDataObjectParser.h
+        src/type/object/parsers/LongBlockDataObjectParser.cpp
+        include/JavaObject/type/object/parsers/LongBlockDataObjectParser.h
+        src/type/object/types/descriptor/NewClassDescriptorObject.cpp
+        src/type/object/types/descriptor/FieldDescriptorObject.cpp
+        src/type/object/types/NullObject.cpp
+        src/type/object/parsers/NullObjectParser.cpp
+        include/JavaObject/type/object/parsers/NullObjectParser.h
 )
 
 add_library(JavaObjectStreams SHARED ${FILES})

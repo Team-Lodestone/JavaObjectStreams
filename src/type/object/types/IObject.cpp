@@ -11,4 +11,8 @@
  */
 #include "JavaObject/type/object/types/IObject.h"
 
-namespace javaobject::type::object {}
+namespace javaobject::type::object {
+    std::string IObject::toString() {
+        return "Object";
+    }
+}

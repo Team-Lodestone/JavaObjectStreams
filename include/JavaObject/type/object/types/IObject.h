@@ -12,10 +12,14 @@
 #ifndef JAVAOBJECTSTREAMS_IOBJECT_H
 #define JAVAOBJECTSTREAMS_IOBJECT_H
 
+#include <string>
+
 namespace javaobject::type::object {
     class IObject {
     public:
         virtual ~IObject() = default;
+
+        virtual std::string toString();
     };
 } // namespace javaobject::type::object
 

@@ -20,6 +20,8 @@ namespace javaobject::type::object {
 
         explicit ReferenceObject(const handle_t handle) : handle(handle) {}
 
+        std::string toString() override;
+
         handle_t handle;
     };
 } // namespace javaobject::type::object

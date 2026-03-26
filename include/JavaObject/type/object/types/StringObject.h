@@ -19,6 +19,8 @@ namespace javaobject::type::object {
     struct StringObject : public IObject {
         explicit StringObject(const std::string &value);
 
+        std::string toString() override;
+
         std::string value;
     };
 } // namespace javaobject::type::object

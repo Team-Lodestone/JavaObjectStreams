@@ -10,10 +10,10 @@
  */
 #include "JavaObject/type/object/types/descriptor/ClassDescriptorInfoObject.h"
 
-namespace javaobject {
-    namespace type {
-        namespace object {
-            namespace descriptor {} // namespace descriptor
-        } // namespace object
-    } // namespace type
-} // namespace javaobject
+#include <format>
+
+namespace javaobject::type::object::descriptor {
+    std::string ClassDescriptorInfoObject::toString() {
+        return std::format("ClassDescriptorInfoObject");
+    }
+}
