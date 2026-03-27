@@ -13,4 +13,11 @@ public class JOSArrayClass implements Serializable {
 	float[] floats = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 	double[] doubles = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 	Subclass[] sc = { new Subclass(), new Subclass(), new Subclass() };
+	
+	int[] manyInts = new int[0xFFFFFF];
+	{
+		for (int i = 0; i < manyInts.length; i++) {
+			manyInts[i] = i;
+		}
+	}
 }

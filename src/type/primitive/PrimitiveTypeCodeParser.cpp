@@ -24,7 +24,7 @@
 
 namespace javaobject::type::primitive {
     PrimitiveTypeCodeParser::PrimitiveTypeCodeParser(std::istream &input, HandleContainer &handleContainer,
-        TypeCodeParserStorage &parserStorage) : ITypeCodeParser(input, handleContainer), ITypeCodeStorageHolder(parserStorage) {
+        TypeCodeParserStorage &parserStorage) : ITypeCodeParser(input, handleContainer), ITypeCodeParserStorageHolder(parserStorage) {
         this->m_parsers[EPrimitiveTypeCode::TYPE_BOOLEAN] = std::make_unique<parsers::PrimitiveBooleanObjectParser>();
         this->m_parsers[EPrimitiveTypeCode::TYPE_BYTE] = std::make_unique<parsers::PrimitiveByteObjectParser>();
         this->m_parsers[EPrimitiveTypeCode::TYPE_CHARACTER] = std::make_unique<parsers::PrimitiveCharObjectParser>();

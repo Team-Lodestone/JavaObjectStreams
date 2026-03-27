@@ -15,14 +15,14 @@
 #include <iosfwd>
 #include <memory>
 
-#include "JavaObject/type/ITypeCodeStorageHolder.h"
+#include "JavaObject/type/ITypeCodeParserStorageHolder.h"
 
 namespace javaobject::type::primitive {
     class PrimitiveTypeCodeParser;
 }
 
 namespace javaobject::type::object {
-    class ObjectTypeCodeParser : public ITypeCodeParser<IObject, parsers::IObjectParser, EObjectTypeCode>, public ITypeCodeStorageHolder {
+    class ObjectTypeCodeParser : public ITypeCodeParser<IObject, parsers::IObjectParser, EObjectTypeCode>, public ITypeCodeParserStorageHolder {
     public:
         explicit ObjectTypeCodeParser(std::istream &input, HandleContainer &handleContainer, TypeCodeParserStorage &parserStorage);
 

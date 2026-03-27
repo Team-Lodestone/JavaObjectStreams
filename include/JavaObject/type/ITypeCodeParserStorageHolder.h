@@ -13,9 +13,9 @@
 #include "TypeCodeParserStorage.h"
 
 namespace javaobject::type {
-    class ITypeCodeStorageHolder {
+    class ITypeCodeParserStorageHolder {
     public:
-        explicit ITypeCodeStorageHolder(TypeCodeParserStorage &parserStorage);
+        explicit ITypeCodeParserStorageHolder(TypeCodeParserStorage &parserStorage);
 
         TypeCodeParserStorage &parserStorage();
 

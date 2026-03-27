@@ -15,20 +15,27 @@
 
 #include <memory>
 #include <unordered_map>
+#include <vector>
 
 namespace javaobject::type {
     class HandleContainer {
     public:
+        static constexpr int HANDLE_START = 0x007E0000;
+
         void registerHandle(const std::shared_ptr<object::IObject> &object);
 
         std::shared_ptr<object::IObject> resolveHandle(const object::ReferenceObject::handle_t handle);
         std::shared_ptr<object::IObject> resolveReference(const object::ReferenceObject *reference);
         std::shared_ptr<object::IObject> resolveReference(const std::shared_ptr<object::ReferenceObject> &reference);
 
+    protected:
+        static constexpr size_t getIndex(const object::ReferenceObject::handle_t handle) {
+            return handle & ~HANDLE_START;
+        }
     private:
         /** Links handles to objects by pointer, these objects are expected to be stored already, otherwise it would leave a dangling/invalid pointer. */
-        std::unordered_map<object::ReferenceObject::handle_t, std::shared_ptr<object::IObject>> m_handles;
-        object::ReferenceObject::handle_t m_nextHandle = 0x007E0000;
+        std::vector<std::shared_ptr<object::IObject>> m_handles;
+        // object::ReferenceObject::handle_t m_nextHandle = 0x007E0000;
     };
 } // namespace javaobject::type
 

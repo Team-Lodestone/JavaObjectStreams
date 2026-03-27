@@ -8,12 +8,12 @@
 * @copyright Copyright (c) 2026 Team Lodestone
 * @license This project is licensed under the LGPL 3.0 license, see the LICENSE file for details.
 */
-#include "JavaObject/type/ITypeCodeStorageHolder.h"
+#include "JavaObject/type/ITypeCodeParserStorageHolder.h"
 
 namespace javaobject::type {
-    ITypeCodeStorageHolder::ITypeCodeStorageHolder(TypeCodeParserStorage &parserStorage) : m_parserStorage(parserStorage) {}
+    ITypeCodeParserStorageHolder::ITypeCodeParserStorageHolder(TypeCodeParserStorage &parserStorage) : m_parserStorage(parserStorage) {}
 
-    TypeCodeParserStorage &ITypeCodeStorageHolder::parserStorage() {
+    TypeCodeParserStorage &ITypeCodeParserStorageHolder::parserStorage() {
         return this->m_parserStorage;
     }
 } // javaobject::type

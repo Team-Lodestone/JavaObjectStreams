@@ -19,7 +19,7 @@
 
 #include <memory>
 
-#include "JavaObject/type/ITypeCodeStorageHolder.h"
+#include "JavaObject/type/ITypeCodeParserStorageHolder.h"
 #include "JavaObject/type/TypeCodeParserStorage.h"
 
 namespace javaobject::type::object {
@@ -27,7 +27,7 @@ namespace javaobject::type::object {
 }
 
 namespace javaobject::type::primitive {
-    class PrimitiveTypeCodeParser : public ITypeCodeParser<types::IPrimitiveObject, parsers::IPrimitiveObjectParser, EPrimitiveTypeCode>, public ITypeCodeStorageHolder {
+    class PrimitiveTypeCodeParser : public ITypeCodeParser<types::IPrimitiveObject, parsers::IPrimitiveObjectParser, EPrimitiveTypeCode>, public ITypeCodeParserStorageHolder {
     public:
         PrimitiveTypeCodeParser(std::istream &input, HandleContainer &handleContainer, TypeCodeParserStorage &parserStorage);
 

@@ -1,10 +1,11 @@
 cmake_minimum_required(VERSION VERSION 3.30)
-project(JavaObjectStreams VERSION 1.3.4)
+project(JavaObjectStreams VERSION 1.3.5)
 
 set(CMAKE_CXX_STANDARD 20)
 
+include(FetchContent)
+
 if (NOT TARGET bio)
-    include(FetchContent)
     FetchContent_Declare(
             bio
             GIT_REPOSITORY https://codeberg.org/Dexrn/libBIO.git
@@ -112,8 +113,8 @@ set(FILES
         src/type/object/ObjectTypeCodeParser.cpp
         src/type/TypeCodeParserStorage.cpp
         include/JavaObject/type/TypeCodeParserStorage.h
-        src/type/ITypeCodeStorageHolder.cpp
-        include/JavaObject/type/ITypeCodeStorageHolder.h
+        src/type/ITypeCodeParserStorageHolder.cpp
+        include/JavaObject/type/ITypeCodeParserStorageHolder.h
         src/type/primitive/parsers/PrimitiveJavaObjectParser.cpp
         include/JavaObject/type/primitive/parsers/PrimitiveJavaObjectParser.h
         src/type/primitive/parsers/PrimitiveArrayObjectParser.cpp
@@ -155,7 +156,7 @@ option(JAVAOBJECTSTREAMS_BUILD_TESTS "Build JavaObjectStreams Tests" ON)
 
 if (JAVAOBJECTSTREAMS_BUILD_TESTS)
     add_subdirectory(tests)
-endif()
+endif ()
 
 unset(JAVAOBJECTSTREAMS_BUILD_TESTS CACHE)
 

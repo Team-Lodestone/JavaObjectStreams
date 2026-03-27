@@ -28,7 +28,7 @@
 #include "JavaObject/type/object/parsers/ShortBlockDataObjectParser.h"
 
 namespace javaobject::type::object {
-    ObjectTypeCodeParser::ObjectTypeCodeParser(std::istream &input, HandleContainer &handleContainer, TypeCodeParserStorage &parserStorage) : ITypeCodeParser(input, handleContainer), ITypeCodeStorageHolder(parserStorage) {
+    ObjectTypeCodeParser::ObjectTypeCodeParser(std::istream &input, HandleContainer &handleContainer, TypeCodeParserStorage &parserStorage) : ITypeCodeParser(input, handleContainer), ITypeCodeParserStorageHolder(parserStorage) {
         this->m_parsers[EObjectTypeCode::TC_STRING] = std::make_unique<object::parsers::StringParser>();
         this->m_parsers[EObjectTypeCode::TC_OBJECT] = std::make_unique<object::parsers::ObjectParser>();
         this->m_parsers[EObjectTypeCode::TC_CLASSDESC] = std::make_unique<object::parsers::descriptor::NewClassDescriptorParser>();
