@@ -20,6 +20,15 @@ namespace javaobject::type::object {
     std::string SerializableClassDataObject::toString() {
         return std::format("SerializableClassData(values={})", this->values.size());
     }
+
+    std::shared_ptr<primitive::types::IPrimitiveObject> SerializableClassDataObject::getFieldValue(const std::string &fieldName) {
+        try {
+            return this->values.at(fieldName);
+        } catch (std::out_of_range &ex) {
+            return nullptr;
+        }
+    }
+
     std::string SerializableWriteMethodClassDataObject::toString() {
         return std::format("SerializableWriteMethodClassData(values={}, annotationContents={})", this->values.size(), this->annotation->contents.size());
     }

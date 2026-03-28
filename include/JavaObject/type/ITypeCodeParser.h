@@ -23,7 +23,8 @@ namespace javaobject::type {
 
         virtual std::shared_ptr<ObjectT> readNext() = 0;
         virtual std::shared_ptr<ObjectT> readUsingParser(const ParserT &parser) = 0;
-        
+        virtual std::shared_ptr<ObjectT> readUsingTypeCode(const TypeCodeT &typecode) = 0;
+
         template <typename T>
         requires std::is_base_of_v<ObjectT, T>
         std::shared_ptr<T> readNextAs() {

@@ -40,6 +40,10 @@ namespace javaobject::type::object {
         this->m_parsers[EObjectTypeCode::TC_ARRAY] = std::make_unique<parsers::ArrayObjectParser>();
     }
 
+    std::shared_ptr<IObject> ObjectTypeCodeParser::readUsingTypeCode(const EObjectTypeCode &typecode) {
+        return this->readUsingParser(*this->getParser(typecode));
+    }
+
     std::shared_ptr<object::IObject> ObjectTypeCodeParser::readNext() {
         const EObjectTypeCode tc = static_cast<EObjectTypeCode>(this->m_input.readByte());
 

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION VERSION 3.30)
-project(JavaObjectStreams VERSION 1.3.5)
+project(JavaObjectStreams VERSION 1.3.6)
 
 set(CMAKE_CXX_STANDARD 20)
 
@@ -159,6 +159,14 @@ if (JAVAOBJECTSTREAMS_BUILD_TESTS)
 endif ()
 
 unset(JAVAOBJECTSTREAMS_BUILD_TESTS CACHE)
+
+option(JAVAOBJECTSTREAMS_BUILD_JOBJDUMP "Build JavaObjectDump" ON)
+
+if (JAVAOBJECTSTREAMS_BUILD_JOBJDUMP)
+    add_subdirectory(util/JavaObjectDump)
+endif ()
+
+unset(JAVAOBJECTSTREAMS_BUILD_JOBJDUMP CACHE)
 
 option(JAVAOBJECTSTREAMS_DOCS_TARGET "Create documentation target" ON)
 

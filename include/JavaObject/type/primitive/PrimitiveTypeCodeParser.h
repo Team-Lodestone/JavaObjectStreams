@@ -33,6 +33,7 @@ namespace javaobject::type::primitive {
 
         std::shared_ptr<types::IPrimitiveObject> readNext() override;
         std::shared_ptr<types::IPrimitiveObject> readUsingParser(const parsers::IPrimitiveObjectParser &parser) override;
+        std::shared_ptr<types::IPrimitiveObject> readUsingTypeCode(const EPrimitiveTypeCode &typecode) override;
     };
 } // namespace javaobject::type::primitive
 

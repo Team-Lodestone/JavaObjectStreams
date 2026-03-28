@@ -52,4 +52,8 @@ namespace javaobject::type::primitive {
         const parsers::IPrimitiveObjectParser &parser) {
         return parser(*this);
     }
+
+    std::shared_ptr<types::IPrimitiveObject> PrimitiveTypeCodeParser::readUsingTypeCode(const EPrimitiveTypeCode &typecode) {
+        return this->readUsingParser(*this->getParser(typecode));
+    }
 } // namespace javaobject::type::primitive

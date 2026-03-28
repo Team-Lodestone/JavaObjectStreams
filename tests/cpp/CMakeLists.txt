@@ -31,5 +31,9 @@ target_link_libraries(JavaObjectStreams.Tests.CPP PRIVATE JavaObjectStreams tfw)
 
 # ENABLE INDIVIDUAL TESTS HERE
 target_compile_definitions(JavaObjectStreams.Tests.CPP PRIVATE
-        READ_OBJECT_FILE=true
+        READ_OBJECT_FILE=false
+        READ_NULL_OBJECT_FILE=true
+        READ_ARRAY_OBJECT_FILE=true
+        READ_ARRAY_OBJECT_FILE_WITH_EXTRA_DATA=true
+        READ_MINECRAFT_OBJECT_FILE=true
 )

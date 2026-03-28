@@ -12,7 +12,9 @@
 #ifndef JAVAOBJECTSTREAMS_IOBJECT_H
 #define JAVAOBJECTSTREAMS_IOBJECT_H
 
+#include <memory>
 #include <string>
+#include <typeinfo>
 
 namespace javaobject::type::object {
     class IObject {
@@ -20,6 +22,24 @@ namespace javaobject::type::object {
         virtual ~IObject() = default;
 
         virtual std::string toString();
+
+        template <typename T>
+        requires std::is_base_of_v<IObject, T>
+        constexpr bool instanceOf() {
+            return typeid(*this) == typeid(T);
+        }
+
+        template <typename T>
+        requires std::is_base_of_v<IObject, T>
+        bool instanceOf(std::shared_ptr<T> object) {
+           return typeid(*this) == typeid(*object);
+        }
+
+        template <typename T>
+        requires std::is_base_of_v<IObject, T>
+        T *as() {
+            return dynamic_cast<T *>(this);
+        }
     };
 } // namespace javaobject::type::object
 

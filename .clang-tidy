@@ -32,6 +32,7 @@ CheckOptions:
   readability-identifier-naming.GlobalVariablePrefix: g_
   # locals
   readability-identifier-naming.LocalVariableCase: camelBack
+  readability-identifier-naming.VariableCase: camelBack
   # params
   readability-identifier-naming.ParameterCase: camelBack
   # template params

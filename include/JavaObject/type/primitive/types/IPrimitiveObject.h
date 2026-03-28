@@ -31,8 +31,12 @@ namespace javaobject::type::primitive::types {
     struct IPrimitiveTypeObject : IPrimitiveObject {
         explicit IPrimitiveTypeObject(T value) : value(value) {}
 
-        operator T() {
+        T unwrap() {
             return value;
+        }
+
+        operator T() {
+            return unwrap();
         }
 
         T value;

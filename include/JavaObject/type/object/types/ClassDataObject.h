@@ -38,6 +38,8 @@ namespace javaobject::type::object
 
         std::string toString() override;
 
+        std::shared_ptr<primitive::types::IPrimitiveObject> getFieldValue(const std::string &fieldName);
+
         std::unordered_map<std::string, std::shared_ptr<primitive::types::IPrimitiveObject>> values;
     };
 

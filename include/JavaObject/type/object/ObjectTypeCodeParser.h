@@ -28,6 +28,7 @@ namespace javaobject::type::object {
 
         std::shared_ptr<object::IObject> readNext() override;
         std::shared_ptr<object::IObject> readUsingParser(const object::parsers::IObjectParser &parser) override;
+        std::shared_ptr<IObject> readUsingTypeCode(const EObjectTypeCode &typecode) override;
     };
 } // namespace javaobject::type
 
