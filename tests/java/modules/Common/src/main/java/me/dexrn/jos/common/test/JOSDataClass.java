@@ -11,14 +11,22 @@
 package me.dexrn.jos.common.test;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class JOSDataClass implements Serializable {
-	boolean b = false;
-	char c = 'c';
-	byte bt = 13;
-	short s = 14;
-	int i = 15;
-	long l = 16;
-	float f = 17.0f;
-	double d = 18.0;
+	public boolean b = false;
+	public char ch = 'a';
+	public byte bt = 1;
+	public short s = 2;
+	public int i = 3;
+	public long l = 4;
+	public float f = 5.0f;
+	public double d = 6.0;
+	public String str = "Hello, world!";
+	public List<Character> chars = List.of(
+		'H','e','l','l','o',',', ' ',
+		'J','a','v','a','.','l','a','n','g','.','C','h','a','r','a','c','t','e','r', ' ',
+		'w','o','r','l','d','!'
+	);
 }

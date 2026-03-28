@@ -1,23 +1,17 @@
 package me.dexrn.jos.common.test;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+import java.util.stream.LongStream;
+import java.util.stream.Stream;
 
 public class JOSArrayClass implements Serializable {
-	public class Subclass implements Serializable {
-		int i = 0;
-	}
-	
 	byte[] bytes = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-	int[] ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-	long[] longs = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+	int[] ints = IntStream.range(0, 9).toArray();
+	long[] longs = LongStream.range(0, 9).toArray();
 	float[] floats = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 	double[] doubles = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-	Subclass[] sc = { new Subclass(), new Subclass(), new Subclass() };
 	
-	int[] manyInts = new int[0xFFFFFF];
-	{
-		for (int i = 0; i < manyInts.length; i++) {
-			manyInts[i] = i;
-		}
-	}
+	JOSDataClass[] classes = Stream.generate(JOSDataClass::new).limit(10).toArray(JOSDataClass[]::new);
 }
