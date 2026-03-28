@@ -26,6 +26,10 @@ namespace javaobject::stream {
         int16_t version = this->m_stream.readBE<uint16_t>();
     }
 
+    std::shared_ptr<type::object::IObject> ObjectInputStream::readObject() const {
+        return this->m_parsers.objectParser->readNext();
+    }
+
     ObjectInputStream &ObjectInputStream::operator>>(std::shared_ptr<type::object::IObject> &object) {
         object = this->readObject();
 
