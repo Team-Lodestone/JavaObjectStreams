@@ -28,6 +28,9 @@ namespace javaobject::type {
         std::shared_ptr<object::IObject> resolveReference(const object::ReferenceObject *reference);
         std::shared_ptr<object::IObject> resolveReference(const std::shared_ptr<object::ReferenceObject> &reference);
 
+        /** TC_RESET requires reset of all handles */
+        void reset();
+
     protected:
         static constexpr size_t getIndex(const object::ReferenceObject::handle_t handle) {
             return handle & ~HANDLE_START;

@@ -8,6 +8,7 @@
 #include "JavaObject/type/object/ObjectTypeCodeParser.h"
 
 #include "JavaObject/type/object/parsers/ArrayObjectParser.h"
+#include "JavaObject/type/object/parsers/ClassObjectParser.h"
 
 #include <cassert>
 #include <format>
@@ -23,8 +24,10 @@
 #include <istream>
 
 #include "JavaObject/type/object/parsers/EndBlockDataObjectParser.h"
+#include "JavaObject/type/object/parsers/ExceptionObjectParser.h"
 #include "JavaObject/type/object/parsers/LongBlockDataObjectParser.h"
 #include "JavaObject/type/object/parsers/NullObjectParser.h"
+#include "JavaObject/type/object/parsers/ResetObjectParser.h"
 #include "JavaObject/type/object/parsers/ShortBlockDataObjectParser.h"
 
 namespace javaobject::type::object {
@@ -32,12 +35,15 @@ namespace javaobject::type::object {
         this->m_parsers[EObjectTypeCode::TC_STRING] = std::make_unique<object::parsers::StringParser>();
         this->m_parsers[EObjectTypeCode::TC_OBJECT] = std::make_unique<object::parsers::ObjectParser>();
         this->m_parsers[EObjectTypeCode::TC_CLASSDESC] = std::make_unique<object::parsers::descriptor::NewClassDescriptorParser>();
+        this->m_parsers[EObjectTypeCode::TC_CLASS] = std::make_unique<object::parsers::ClassObjectParser>();
         this->m_parsers[EObjectTypeCode::TC_REFERENCE] = std::make_unique<object::parsers::ReferenceParser>();
         this->m_parsers[EObjectTypeCode::TC_ENDBLOCKDATA] = std::make_unique<object::parsers::EndBlockDataObjectParser>();
         this->m_parsers[EObjectTypeCode::TC_BLOCKDATA] = std::make_unique<object::parsers::ShortBlockDataObjectParser>();
         this->m_parsers[EObjectTypeCode::TC_BLOCKDATALONG] = std::make_unique<object::parsers::LongBlockDataObjectParser>();
         this->m_parsers[EObjectTypeCode::TC_NULL] = std::make_unique<parsers::NullObjectParser>();
         this->m_parsers[EObjectTypeCode::TC_ARRAY] = std::make_unique<parsers::ArrayObjectParser>();
+        this->m_parsers[EObjectTypeCode::TC_RESET] = std::make_unique<parsers::ResetObjectParser>();
+        this->m_parsers[EObjectTypeCode::TC_EXCEPTION] = std::make_unique<parsers::ExceptionObjectParser>();
     }
 
     std::shared_ptr<IObject> ObjectTypeCodeParser::readUsingTypeCode(const EObjectTypeCode &typecode) {

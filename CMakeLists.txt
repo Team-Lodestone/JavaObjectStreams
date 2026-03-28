@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION VERSION 3.30)
-project(JavaObjectStreams VERSION 1.3.7)
+project(JavaObjectStreams VERSION 1.3.8)
 
 set(CMAKE_CXX_STANDARD 20)
 
@@ -139,6 +139,14 @@ set(FILES
         include/JavaObject/type/object/types/descriptor/NewClassDescriptorObject.h
         src/type/object/parsers/ArrayObjectParser.cpp
         include/JavaObject/type/object/parsers/ArrayObjectParser.h
+        include/JavaObject/type/object/types/ResetObject.h
+        src/type/object/types/ResetObject.cpp
+        include/JavaObject/type/object/parsers/ResetObjectParser.h
+        src/type/object/parsers/ResetObjectParser.cpp
+        include/JavaObject/type/object/parsers/ExceptionObjectParser.h
+        src/type/object/parsers/ExceptionObjectParser.cpp
+        include/JavaObject/type/object/parsers/ClassObjectParser.h
+        src/type/object/parsers/ClassObjectParser.cpp
 )
 
 add_library(JavaObjectStreams SHARED ${FILES})

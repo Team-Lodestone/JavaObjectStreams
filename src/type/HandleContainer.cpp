@@ -40,4 +40,8 @@ namespace javaobject::type {
     std::shared_ptr<object::IObject> HandleContainer::resolveReference(const std::shared_ptr<object::ReferenceObject> &reference) {
         return this->resolveReference(reference.get());
     }
-}
+    // TODO or maybe reset should just increment the base and we count from there, would prevent references from being nuked
+    void HandleContainer::reset() {
+        this->m_handles.clear();
+    }
+} // namespace javaobject::type
