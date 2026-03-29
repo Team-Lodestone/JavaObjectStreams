@@ -11,6 +11,15 @@
 package me.dexrn.jos.output;
 
 import me.dexrn.jos.output.outputs.*;
+import me.dexrn.jos.output.outputs.array.ArrayClassOutput;
+import me.dexrn.jos.output.outputs.array.NestedArrayClassOutput;
+import me.dexrn.jos.output.outputs.externalizable.ExternalizableClassOutput;
+import me.dexrn.jos.output.outputs.externalizable.ExternalizableEmptyClassOutput;
+import me.dexrn.jos.output.outputs.externalizable.ExternalizableWithExtraDataObjectOutput;
+import me.dexrn.jos.output.outputs.extra.CustomSvUIDClassOutput;
+import me.dexrn.jos.output.outputs.extra.LongFieldNameClassOutput;
+import me.dexrn.jos.output.outputs.extra.TortureClassOutput;
+import me.dexrn.jos.output.outputs.polymorphism.PolymorphicClassOutput;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -29,15 +38,21 @@ public class OutputTestFile {
 		
 		outputs.add(new DataClassOutput());
 		outputs.add(new SubclassedClassOutput());
-		
+		outputs.add(new NullObjectOutput());
+
+		outputs.add(new ExternalizableClassOutput());
+		outputs.add(new ExternalizableWithExtraDataObjectOutput());
+		outputs.add(new ExternalizableEmptyClassOutput());
+
 		outputs.add(new ArrayClassOutput());
 		outputs.add(new NestedArrayClassOutput());
 
 		outputs.add(new PolymorphicClassOutput());
-		outputs.add(new ExternalizedClassOutput());
+		outputs.add(new EnumClassOutput());
 		
 		outputs.add(new CustomSvUIDClassOutput());
 		outputs.add(new LongFieldNameClassOutput());
+		outputs.add(new TortureClassOutput());
 	}
 	
 	public static void main(String[] args) throws IOException {

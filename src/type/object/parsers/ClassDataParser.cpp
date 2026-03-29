@@ -106,8 +106,12 @@ namespace javaobject::type::object::parsers {
     }
 
     std::shared_ptr<object::ExternalizableClassDataObject>
-    ClassDataParser::parseExternalizableClassData(type::object::ObjectTypeCodeParser &parser) const {}
+    ClassDataParser::parseExternalizableClassData(type::object::ObjectTypeCodeParser &parser) const {
+        throw std::runtime_error("externalizable");
+    }
 
     std::shared_ptr<object::ExternalizableBlockDataClassDataObject>
-    ClassDataParser::parseExternalizableBlockDataClassData(type::object::ObjectTypeCodeParser &parser) const {}
+    ClassDataParser::parseExternalizableBlockDataClassData(type::object::ObjectTypeCodeParser &parser) const {
+        throw std::runtime_error("externalizable w/ blockdata");
+    }
 } // namespace javaobject::type::object::parsers

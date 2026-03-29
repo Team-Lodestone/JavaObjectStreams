@@ -1,6 +1,6 @@
-package me.dexrn.jos.output.outputs;
+package me.dexrn.jos.output.outputs.extra;
 
-import me.dexrn.jos.common.test.JOSHasCustomSvUIDClass;
+import me.dexrn.jos.common.test.extra.JOSHasCustomSvUIDClass;
 import me.dexrn.jos.output.AbstractObjectOutput;
 
 public class CustomSvUIDClassOutput extends AbstractObjectOutput<JOSHasCustomSvUIDClass> {

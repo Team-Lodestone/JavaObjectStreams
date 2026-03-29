@@ -1,6 +1,6 @@
-package me.dexrn.jos.output.outputs;
+package me.dexrn.jos.output.outputs.array;
 
-import me.dexrn.jos.common.test.JOSNestedArrayClass;
+import me.dexrn.jos.common.test.array.JOSNestedArrayClass;
 import me.dexrn.jos.output.AbstractObjectOutput;
 
 public class NestedArrayClassOutput extends AbstractObjectOutput<JOSNestedArrayClass> {

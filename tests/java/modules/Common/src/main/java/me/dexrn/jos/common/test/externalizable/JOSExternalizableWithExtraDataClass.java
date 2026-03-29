@@ -8,9 +8,9 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.List;
 
-public class JOSExternalizableDataClass implements Externalizable {
+public class JOSExternalizableWithExtraDataClass implements Externalizable {
 	JOSDataClass dataClass = new JOSDataClass();
-	String chars = "Hello, externalizable world!";
+	String chars = "Hello, externalizable (with BlockData) world!";
 	
 	@Override
 	public void writeExternal(ObjectOutput objectOutput) throws IOException {

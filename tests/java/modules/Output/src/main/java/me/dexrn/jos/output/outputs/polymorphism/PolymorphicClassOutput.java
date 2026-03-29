@@ -1,4 +1,4 @@
-package me.dexrn.jos.output.outputs;
+package me.dexrn.jos.output.outputs.polymorphism;
 
 import me.dexrn.jos.common.test.polymorphism.JOSPolymorphicClass;
 import me.dexrn.jos.output.AbstractObjectOutput;

@@ -1,6 +1,6 @@
-package me.dexrn.jos.output.outputs;
+package me.dexrn.jos.output.outputs.array;
 
-import me.dexrn.jos.common.test.JOSArrayClass;
+import me.dexrn.jos.common.test.array.JOSArrayClass;
 import me.dexrn.jos.output.AbstractObjectOutput;
 
 public class ArrayClassOutput extends AbstractObjectOutput<JOSArrayClass> {

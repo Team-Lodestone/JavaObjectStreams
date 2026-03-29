@@ -1,4 +1,6 @@
-package me.dexrn.jos.common.test;
+package me.dexrn.jos.common.test.array;
+
+import me.dexrn.jos.common.test.JOSDataClass;
 
 import java.io.Serializable;
 import java.util.stream.Stream;

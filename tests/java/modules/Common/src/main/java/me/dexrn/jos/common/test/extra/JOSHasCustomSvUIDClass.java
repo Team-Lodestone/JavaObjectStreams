@@ -1,4 +1,4 @@
-package me.dexrn.jos.common.test;
+package me.dexrn.jos.common.test.extra;
 
 import java.io.Serial;
 import java.io.Serializable;
