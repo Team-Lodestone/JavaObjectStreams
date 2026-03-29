@@ -50,6 +50,7 @@ int main(const int argv, char *argc[]) {
     t.addTest(READ_OBJECT_FILE, "Read data class object", readObjectTest, "input/JOSDataClass.obj");
     t.addTest(READ_SUBCLASSED_CLASS_OBJECT_FILE, "Read class object with subclass fields", readObjectTest, "input/JOSSubclassedClass.obj");
     t.addTest(READ_NULL_OBJECT_FILE, "Read null object", readObjectTestRequireInstanceOf<javaobject::type::object::NullObject>, "input/JOSNullObject.obj");
+    t.addTest(READ_PROXY_OBJECT_FILE, "Read proxy class object", readObjectTest, "input/JOSProxyClass.obj");
 
     t.addTest(READ_EXTERNALIZABLE_CLASS_OBJECT_FILE, "Read externalizable class object", readObjectTest, "input/JOSExternalizableClass.obj");
     t.addTest(READ_EXTERNALIZABLE_EXTRA_DATA_CLASS_OBJECT_FILE, "Read externalizable class object with extra data", readObjectTest, "input/JOSExternalizableWithExtraDataClass.obj");

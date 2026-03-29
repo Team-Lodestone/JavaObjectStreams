@@ -35,6 +35,7 @@ target_compile_definitions(JavaObjectStreams.Tests.CPP PRIVATE
         READ_OBJECT_FILE=true
         READ_NULL_OBJECT_FILE=true
         READ_ARRAY_OBJECT_FILE=true
+        READ_PROXY_OBJECT_FILE=true
         READ_ARRAY_OBJECT_FILE_WITH_EXTRA_DATA=true
         READ_NESTED_ARRAY_OBJECT_FILE=true
         READ_POLYMORPHIC_OBJECT_FILE=true

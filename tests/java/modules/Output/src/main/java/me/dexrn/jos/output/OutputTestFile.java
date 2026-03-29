@@ -39,6 +39,7 @@ public class OutputTestFile {
 		outputs.add(new DataClassOutput());
 		outputs.add(new SubclassedClassOutput());
 		outputs.add(new NullObjectOutput());
+		outputs.add(new ProxyClassOutput());
 
 		outputs.add(new ExternalizableClassOutput());
 		outputs.add(new ExternalizableWithExtraDataObjectOutput());
