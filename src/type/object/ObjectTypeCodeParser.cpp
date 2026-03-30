@@ -29,6 +29,7 @@
 #include "JavaObject/type/object/parsers/NullObjectParser.h"
 #include "JavaObject/type/object/parsers/ResetObjectParser.h"
 #include "JavaObject/type/object/parsers/ShortBlockDataObjectParser.h"
+#include "JavaObject/type/object/parsers/descriptor/NewProxyClassDescriptorParser.h"
 
 namespace javaobject::type::object {
     ObjectTypeCodeParser::ObjectTypeCodeParser(std::istream &input, HandleContainer &handleContainer, TypeCodeParserStorage &parserStorage) : ITypeCodeParser(input, handleContainer), ITypeCodeParserStorageHolder(parserStorage) {
@@ -44,6 +45,7 @@ namespace javaobject::type::object {
         this->m_parsers[EObjectTypeCode::TC_ARRAY] = std::make_unique<parsers::ArrayObjectParser>();
         this->m_parsers[EObjectTypeCode::TC_RESET] = std::make_unique<parsers::ResetObjectParser>();
         this->m_parsers[EObjectTypeCode::TC_EXCEPTION] = std::make_unique<parsers::ExceptionObjectParser>();
+        this->m_parsers[EObjectTypeCode::TC_PROXYCLASSDESC] = std::make_unique<parsers::descriptor::NewProxyClassDescriptorParser>();
     }
 
     std::shared_ptr<IObject> ObjectTypeCodeParser::readUsingTypeCode(const EObjectTypeCode &typecode) {

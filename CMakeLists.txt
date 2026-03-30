@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION VERSION 3.30)
-project(JavaObjectStreams VERSION 1.3.9)
+project(JavaObjectStreams VERSION 1.3.10)
 
 set(CMAKE_CXX_STANDARD 20)
 
@@ -147,6 +147,14 @@ set(FILES
         src/type/object/parsers/ExceptionObjectParser.cpp
         include/JavaObject/type/object/parsers/ClassObjectParser.h
         src/type/object/parsers/ClassObjectParser.cpp
+        include/JavaObject/type/object/types/descriptor/ProxyClassDescriptorObject.cpp
+        include/JavaObject/type/object/types/descriptor/ProxyClassDescriptorObject.h
+        include/JavaObject/type/object/types/descriptor/ProxyClassDescriptorInfoObject.cpp
+        include/JavaObject/type/object/types/descriptor/ProxyClassDescriptorInfoObject.h
+        include/JavaObject/type/object/parsers/descriptor/NewProxyClassDescriptorParser.cpp
+        include/JavaObject/type/object/parsers/descriptor/NewProxyClassDescriptorParser.h
+        include/JavaObject/type/object/parsers/descriptor/ProxyClassDescriptorInfoParser.cpp
+        include/JavaObject/type/object/parsers/descriptor/ProxyClassDescriptorInfoParser.h
 )
 
 add_library(JavaObjectStreams SHARED ${FILES})

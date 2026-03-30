@@ -18,6 +18,14 @@ A C++ library to provide serialization and deserialization of Java objects (ala 
 | **Deserialization** |                                                   ✅                                                    |                                                   ✅                                                    |
 |  **Serialization**  |                                                   ❌                                                    |                                                   ❌                                                    |
 
+#### TODO
+- Fix up API (probably in the style of the Java Reflection API)
+- Add and implement common interfaces between similar objects (looking at you ProxyClass and NewClass)
+- Properly validate expected types, use std::variant (or actually it would be nicer to make a custom holder) in place of IObject when available.
+  - For object types like TC_ENDBLOCKDATA, we can ignore it and store nullptr.
 ## Contributing
 Unless otherwise stated, contributions are licensed under the terms of the
 MIT license.
+
+## Credits
+https://docs.oracle.com/javase/9/docs/specs/serialization/protocol.html#grammar-for-the-stream-format

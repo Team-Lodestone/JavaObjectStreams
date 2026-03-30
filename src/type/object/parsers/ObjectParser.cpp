@@ -16,6 +16,7 @@
 #include "JavaObject/type/object/types/NullObject.h"
 #include "JavaObject/type/object/types/Object.h"
 #include "JavaObject/type/object/types/descriptor/NewClassDescriptorObject.h"
+#include "JavaObject/type/object/types/descriptor/ProxyClassDescriptorObject.h"
 
 namespace javaobject::type::object::parsers {
     std::shared_ptr<object::IObject> ObjectParser::operator()(type::object::ObjectTypeCodeParser &parser) const {
@@ -24,7 +25,14 @@ namespace javaobject::type::object::parsers {
         obj->clazz = parser.readNext();
         parser.handleContainer().registerHandle(obj);
 
-        obj->classData = ClassDataParser(std::static_pointer_cast<descriptor::NewClassDescriptorObject>(obj->clazz)->info)(parser);
+        // TODO we can implement common interface between proxy and non proxy class object with getters
+        // TODO this really needs a cleanup
+        if (auto c = std::dynamic_pointer_cast<descriptor::NewClassDescriptorObject>(obj->clazz)) {
+            obj->classData = ClassDataParser(c->info)(parser);
+        } else if (auto c = std::dynamic_pointer_cast<types::descriptor::ProxyClassDescriptorObject>(obj->clazz)) {
+            if (auto ci = std::dynamic_pointer_cast<descriptor::NewClassDescriptorObject>(c->info->m_superClassDesc))
+                obj->classData = ClassDataParser(ci->info)(parser);
+        }
 
         return obj;
     }

@@ -22,10 +22,6 @@
 #include <vector>
 
 namespace javaobject::type::object::descriptor {
-    class NewProxyClassDescriptorObject : public IObject {
-        // TODO
-    };
-
     struct NewClassDescriptorObject : IObject {
       public:
         NewClassDescriptorObject(const std::string &name, const std::uint64_t serialVersionUid, std::shared_ptr<ClassDescriptorInfoObject> info)
