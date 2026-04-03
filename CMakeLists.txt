@@ -147,13 +147,13 @@ set(FILES
         src/type/object/parsers/ExceptionObjectParser.cpp
         include/JavaObject/type/object/parsers/ClassObjectParser.h
         src/type/object/parsers/ClassObjectParser.cpp
-        include/JavaObject/type/object/types/descriptor/ProxyClassDescriptorObject.cpp
+        src/type/object/types/descriptor/ProxyClassDescriptorObject.cpp
         include/JavaObject/type/object/types/descriptor/ProxyClassDescriptorObject.h
-        include/JavaObject/type/object/types/descriptor/ProxyClassDescriptorInfoObject.cpp
+        src/type/object/types/descriptor/ProxyClassDescriptorInfoObject.cpp
         include/JavaObject/type/object/types/descriptor/ProxyClassDescriptorInfoObject.h
-        include/JavaObject/type/object/parsers/descriptor/NewProxyClassDescriptorParser.cpp
+        src/type/object/parsers/descriptor/NewProxyClassDescriptorParser.cpp
         include/JavaObject/type/object/parsers/descriptor/NewProxyClassDescriptorParser.h
-        include/JavaObject/type/object/parsers/descriptor/ProxyClassDescriptorInfoParser.cpp
+        src/type/object/parsers/descriptor/ProxyClassDescriptorInfoParser.cpp
         include/JavaObject/type/object/parsers/descriptor/ProxyClassDescriptorInfoParser.h
 )
 
