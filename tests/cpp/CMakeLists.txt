@@ -14,7 +14,7 @@ if (NOT TARGET tfw)
     FetchContent_Declare(
             tfw
             GIT_REPOSITORY https://codeberg.org/Dexrn/tfw.git
-            GIT_TAG 1.1.0
+            GIT_TAG 1.2.3
             GIT_SHALLOW TRUE
     )
 

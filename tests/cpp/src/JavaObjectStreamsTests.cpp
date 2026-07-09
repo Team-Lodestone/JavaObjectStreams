@@ -43,30 +43,31 @@ tfw::test::result::TestResult readObjectTestRequireInstanceOf(tfw::test::logging
     return tfw::test::result::TestResult(obj->instanceOf<T>(), obj->toString());
 }
 
-int main(const int argv, char *argc[]) {
-    tfw::TestFramework t = tfw::TestFramework::fromArgs(argv, argc);
+int main(const int argc, char *argv[]) {
+    const auto t = tfw::TestFramework::initFromArgs(argc, argv);
+    auto &mgr = tfw::TestFramework::getInstance()->testManager();
 
     //todo add all tests
-    t.addTest(READ_OBJECT_FILE, "Read data class object", readObjectTest, "input/JOSDataClass.obj");
-    t.addTest(READ_SUBCLASSED_CLASS_OBJECT_FILE, "Read class object with subclass fields", readObjectTest, "input/JOSSubclassedClass.obj");
-    t.addTest(READ_NULL_OBJECT_FILE, "Read null object", readObjectTestRequireInstanceOf<javaobject::type::object::NullObject>, "input/JOSNullObject.obj");
-    t.addTest(READ_PROXY_OBJECT_FILE, "Read proxy class object", readObjectTest, "input/JOSProxyClass.obj");
+    mgr.addTest(READ_OBJECT_FILE, "Read data class object", readObjectTest, "input/JOSDataClass.obj");
+    mgr.addTest(READ_SUBCLASSED_CLASS_OBJECT_FILE, "Read class object with subclass fields", readObjectTest, "input/JOSSubclassedClass.obj");
+    mgr.addTest(READ_NULL_OBJECT_FILE, "Read null object", readObjectTestRequireInstanceOf<javaobject::type::object::NullObject>, "input/JOSNullObject.obj");
+    mgr.addTest(READ_PROXY_OBJECT_FILE, "Read proxy class object", readObjectTest, "input/JOSProxyClass.obj");
 
-    t.addTest(READ_EXTERNALIZABLE_CLASS_OBJECT_FILE, "Read externalizable class object", readObjectTest, "input/JOSExternalizableClass.obj");
-    t.addTest(READ_EXTERNALIZABLE_EXTRA_DATA_CLASS_OBJECT_FILE, "Read externalizable class object with extra data", readObjectTest, "input/JOSExternalizableWithExtraDataClass.obj");
-    t.addTest(READ_EMPTY_EXTERNALIZABLE_CLASS_OBJECT_FILE, "Read empty externalizable class object", readObjectTest, "input/JOSEmptyExternalizableClass.obj");
+    mgr.addTest(READ_EXTERNALIZABLE_CLASS_OBJECT_FILE, "Read externalizable class object", readObjectTest, "input/JOSExternalizableClass.obj");
+    mgr.addTest(READ_EXTERNALIZABLE_EXTRA_DATA_CLASS_OBJECT_FILE, "Read externalizable class object with extra data", readObjectTest, "input/JOSExternalizableWithExtraDataClass.obj");
+    mgr.addTest(READ_EMPTY_EXTERNALIZABLE_CLASS_OBJECT_FILE, "Read empty externalizable class object", readObjectTest, "input/JOSEmptyExternalizableClass.obj");
 
-    t.addTest(READ_ARRAY_OBJECT_FILE, "Read array object", readObjectTest, "input/JOSArrayClass.obj");
-    t.addTest(READ_NESTED_ARRAY_OBJECT_FILE, "Read nested array object", readObjectTest, "input/JOSNestedArrayClass.obj");
+    mgr.addTest(READ_ARRAY_OBJECT_FILE, "Read array object", readObjectTest, "input/JOSArrayClass.obj");
+    mgr.addTest(READ_NESTED_ARRAY_OBJECT_FILE, "Read nested array object", readObjectTest, "input/JOSNestedArrayClass.obj");
 
-    t.addTest(READ_POLYMORPHIC_OBJECT_FILE, "Read polymorphic class object", readObjectTest, "input/JOSPolymorphicClass.obj");
-    t.addTest(READ_ENUM_OBJECT_FILE, "Read enum object", readObjectTest, "input/JOSEnumClass.obj");
+    mgr.addTest(READ_POLYMORPHIC_OBJECT_FILE, "Read polymorphic class object", readObjectTest, "input/JOSPolymorphicClass.obj");
+    mgr.addTest(READ_ENUM_OBJECT_FILE, "Read enum object", readObjectTest, "input/JOSEnumClass.obj");
 
-    t.addTest(READ_CUSTOM_UID_OBJECT_FILE, "Read object with custom serialVersionUid", readObjectTest, "input/JOSHasCustomSvUIDClass.obj");
-    t.addTest(READ_CLASS_OBJECT_WITH_LONG_FIELD_NAME, "Read class object with long field name", readObjectTest, "input/JOSClassWithLongFieldName.obj");
-    t.addTest(READ_TORTURE_CLASS_OBJECT, "Read torture object", readObjectTest, "input/JOSTortureClass.obj");
+    mgr.addTest(READ_CUSTOM_UID_OBJECT_FILE, "Read object with custom serialVersionUid", readObjectTest, "input/JOSHasCustomSvUIDClass.obj");
+    mgr.addTest(READ_CLASS_OBJECT_WITH_LONG_FIELD_NAME, "Read class object with long field name", readObjectTest, "input/JOSClassWithLongFieldName.obj");
+    mgr.addTest(READ_TORTURE_CLASS_OBJECT, "Read torture object", readObjectTest, "input/JOSTortureClass.obj");
 
-    // t.addTest(READ_ARRAY_OBJECT_FILE_WITH_EXTRA_DATA, "Read array + extra data input object", [](const tfw::test::util::TestOutputLogger *logger) {
+    // mgr.addTest(READ_ARRAY_OBJECT_FILE_WITH_EXTRA_DATA, "Read array + extra data input object", [](const tfw::test::util::TestOutputLogger *logger) {
     //     std::ifstream input("input/JOSTestArrayWithExtraData.obj");
     //     input.exceptions(std::ios::badbit | std::ios::eofbit);
     //
@@ -82,7 +83,7 @@ int main(const int argv, char *argc[]) {
     // });
 
     // TODO: Re-serialize read object in WRITE_MINECRAFT_OBJECT_FILE
-    // t.addTest(READ_MINECRAFT_OBJECT_FILE, "Read Minecraft object", [](const tfw::test::util::TestOutputLogger *logger) {
+    // mgr.addTest(READ_MINECRAFT_OBJECT_FILE, "Read Minecraft object", [](const tfw::test::util::TestOutputLogger *logger) {
     //     std::ifstream input("input/MinecraftJOSTestClass.obj");
     //     input.exceptions(std::ios::badbit | std::ios::eofbit);
     //
@@ -94,7 +95,7 @@ int main(const int argv, char *argc[]) {
     //     auto obj = ois.readObject();
     // });
 
-    t.run();
+    t->run();
 
     return 0;
 }
