@@ -157,10 +157,10 @@ set(FILES
         include/JavaObject/type/object/parsers/descriptor/ProxyClassDescriptorInfoParser.h
 )
 
-if (CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
-    add_library(JavaObjectStreams STATIC ${FILES})
-else()
+if (BUILD_SHARED_LIBS)
     add_library(JavaObjectStreams SHARED ${FILES})
+else()
+    add_library(JavaObjectStreams STATIC ${FILES})
 endif()
 target_include_directories(JavaObjectStreams
         PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
